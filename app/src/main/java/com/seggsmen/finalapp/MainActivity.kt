@@ -37,7 +37,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToPastMeals() {
-        Toast.makeText(this, "going to past meals", Toast.LENGTH_SHORT).show()
+        val intent: Intent = Intent(this, ListPastMealsActivity::class.java)
+        startActivity(intent)
     }
 
     private fun showBlurAndTrackButton() {

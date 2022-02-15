@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff7ef"
+    tools:context=".ViewPastMealActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Chicken Fried Rice"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/bottom_rounded_corners"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:srcCompat="@drawable/fried_rice_view" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="Food Groups in Meal:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+            <LinearLayout
+                android:id="@+id/nutritionPillsRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/icon_pill"
+                    android:backgroundTint="#d1e5bc"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/vegetables_icon_small" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="4"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/icon_pill"
+                    android:backgroundTint="#fadad4"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/fruits_icon_small" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="0"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/icon_pill"
+                    android:backgroundTint="#f6edbe"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/grains_icon_small" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="4"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/icon_pill"
+                    android:backgroundTint="#e6f1f2"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/fish_icon_small" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="0"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/nutritionPillsRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nutritionPillsRow1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/icon_pill"
+                    android:backgroundTint="#fce5d1"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/poultry_icon_small" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="3"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/icon_pill"
+                    android:backgroundTint="#f5e5e1"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/meat_icon_small" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="0"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/icon_pill"
+                    android:backgroundTint="#f3ecd8"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/oils_icon_small" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="1"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/icon_pill"
+                    android:backgroundTint="#e7ebf3"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/dairy_icon_small" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="0"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nutritionPillsRow2">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Times Eaten: "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="15"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:text="Chicken Fried Rice"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView5"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:background="@drawable/bottom_rounded_corners"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView3"-->
+<!--        app:srcCompat="@drawable/fried_rice_view" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView5"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:text="Food Groups in Meal:"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/imageView5" />-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/nutritionPillsRow1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView5">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:background="@drawable/icon_pill"-->
+<!--            android:backgroundTint="#d1e5bc"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/vegetables_icon_small" />-->
+
+<!--            <Space-->
+<!--                android:layout_width="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="4"-->
+<!--                android:textColor="@color/black" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:background="@drawable/icon_pill"-->
+<!--            android:backgroundTint="#fadad4"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/fruits_icon_small" />-->
+
+<!--            <Space-->
+<!--                android:layout_width="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="0"-->
+<!--                android:textColor="@color/black" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:background="@drawable/icon_pill"-->
+<!--            android:backgroundTint="#f6edbe"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/grains_icon_small" />-->
+
+<!--            <Space-->
+<!--                android:layout_width="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="4"-->
+<!--                android:textColor="@color/black" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@drawable/icon_pill"-->
+<!--            android:backgroundTint="#e6f1f2"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/fish_icon_small" />-->
+
+<!--            <Space-->
+<!--                android:layout_width="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="0"-->
+<!--                android:textColor="@color/black" />-->
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/nutritionPillsRow2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/nutritionPillsRow1">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:background="@drawable/icon_pill"-->
+<!--            android:backgroundTint="#fce5d1"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/poultry_icon_small" />-->
+
+<!--            <Space-->
+<!--                android:layout_width="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="3"-->
+<!--                android:textColor="@color/black" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:background="@drawable/icon_pill"-->
+<!--            android:backgroundTint="#f5e5e1"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/meat_icon_small" />-->
+
+<!--            <Space-->
+<!--                android:layout_width="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="0"-->
+<!--                android:textColor="@color/black" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:background="@drawable/icon_pill"-->
+<!--            android:backgroundTint="#f3ecd8"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/oils_icon_small" />-->
+
+<!--            <Space-->
+<!--                android:layout_width="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="1"-->
+<!--                android:textColor="@color/black" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@drawable/icon_pill"-->
+<!--            android:backgroundTint="#e7ebf3"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                app:srcCompat="@drawable/dairy_icon_small" />-->
+
+<!--            <Space-->
+<!--                android:layout_width="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="0"-->
+<!--                android:textColor="@color/black" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/nutritionPillsRow2">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/textView13"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Times Eaten: "-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/textView14"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="15"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="16sp" />-->
+<!--    </LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
