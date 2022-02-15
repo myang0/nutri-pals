@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IAT359FinalApp">
         <activity
+            android:name=".ViewPastMealActivity"
+            android:exported="true" />
+        <activity
             android:name=".ListPastMealsActivity"
             android:exported="true" />
         <activity
