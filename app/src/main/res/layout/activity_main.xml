@@ -35,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Bjingus"
+                android:text="Bjïngus"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
