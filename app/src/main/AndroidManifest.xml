@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IAT359FinalApp">
         <activity
+            android:name=".ViewPastPetActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ListPastPetsActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

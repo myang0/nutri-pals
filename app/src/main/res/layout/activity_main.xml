@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff7ef"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -26,8 +27,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="1"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton4"
-            app:layout_constraintStart_toStartOf="@+id/imageButton4">
+            app:layout_constraintEnd_toStartOf="@+id/pastMealsButton"
+            app:layout_constraintStart_toStartOf="@+id/pastMealsButton">
 
             <TextView
                 android:id="@+id/textView2"
@@ -39,7 +40,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+                app:layout_constraintEnd_toStartOf="@+id/pastPetsButton"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -47,14 +48,14 @@
                 tools:layout_conversion_absoluteWidth="91dp" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/pastPetsButton"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_marginEnd="5dp"
                 android:backgroundTint="#943131"
                 android:src="@drawable/past_pets_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+                app:layout_constraintEnd_toStartOf="@+id/pastMealsButton"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -63,7 +64,7 @@
                 tools:layout_conversion_absoluteWidth="70dp" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/pastMealsButton"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:backgroundTint="#943131"
@@ -71,7 +72,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageButton5"
+                app:layout_constraintStart_toEndOf="@+id/pastPetsButton"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck"
                 tools:layout_conversion_absoluteHeight="44dp"
