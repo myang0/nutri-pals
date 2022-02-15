@@ -8,13 +8,15 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/trackMealUnderlay"
         android:layout_width="409dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
+        android:visibility="visible"
         android:weightSum="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -475,11 +477,10 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:id="@+id/trackMealButton"
+                android:layout_width="70sp"
+                android:layout_height="75sp"
                 android:backgroundTint="#943131"
-                android:baselineAlignBottom="false"
                 android:src="@drawable/food_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -487,4 +488,54 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/trackMealOverlayLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/cancelTrackMealButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:alpha="0.5"
+            android:background="@drawable/cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/cancel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/newMealButton"
+            android:layout_width="0dp"
+            android:layout_height="56sp"
+            android:layout_marginBottom="24sp"
+            android:paddingHorizontal="40sp"
+            android:paddingVertical="8sp"
+            android:text="New Meal"
+            app:icon="@drawable/leaf"
+            app:layout_constraintBottom_toTopOf="@+id/savedMealsButton"
+            app:layout_constraintEnd_toEndOf="@+id/savedMealsButton"
+            app:layout_constraintStart_toStartOf="@+id/savedMealsButton" />
+
+        <Button
+            android:id="@+id/savedMealsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="56sp"
+            android:layout_marginBottom="64sp"
+            android:paddingHorizontal="32sp"
+            android:paddingVertical="8sp"
+            android:text="Saved Meals"
+            app:icon="@drawable/vegetables_icon_small"
+            app:layout_constraintBottom_toTopOf="@+id/cancelTrackMealButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
