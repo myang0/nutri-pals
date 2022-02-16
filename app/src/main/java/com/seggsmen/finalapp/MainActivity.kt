@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToNewMeal() {
-        Toast.makeText(this, "going to new meals", Toast.LENGTH_SHORT).show()
+        val intent: Intent = Intent(this, TrackNewMealActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToSavedMeals() {
