@@ -1,38 +1,46 @@
 package com.seggsmen.finalapp
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.seggsmen.finalapp.databinding.ActivityNewMealBinding
 
+private const val NUM_PAGES = 3
+
 class TrackNewMealActivity  : AppCompatActivity() {
-    lateinit var binding: ActivityNewMealBinding
+    public lateinit var binding: ActivityNewMealBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityNewMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        var actionBar : ActionBar? = this.supportActionBar
-
-        actionBar?.setTitle("Meal Info")
-        actionBar?.setSubtitle("Track Meal")
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.nextButton.setOnClickListener {navigateToNextScreen()}
+        val pagerAdapter = ScreenSlidePagerAdapter(this)
+        binding.pager.adapter = pagerAdapter
+        binding.pager.isUserInputEnabled = false
+        binding.pager.setPageTransformer(PageViewFadeTransformer())
+        supportActionBar?.hide()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
+    override fun onBackPressed() {
+        if (binding.pager.currentItem == 0) {
+            super.onBackPressed()
+        } else {
+            binding.pager.currentItem = binding.pager.currentItem - 1
+        }
     }
 
-    private fun navigateToNextScreen() {
-        Toast.makeText(this, "wahoo", Toast.LENGTH_SHORT).show()
-//        val intent: Intent = Intent(this, ::class.java)
-//        startActivity(intent)
+    private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = NUM_PAGES
+
+        override fun createFragment(position: Int): Fragment {
+            when (position) {
+                0 -> return NewMealAddMealFragment()
+                1 -> return NewMealAddPhotoFragment()
+                2 -> return NewMealServingFragment()
+            }
+            return NewMealAddMealFragment()
+        }
     }
 }
