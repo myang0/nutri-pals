@@ -8,7 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.seggsmen.finalapp.databinding.ActivityNewMealBinding
 
-private const val NUM_PAGES = 3
+private const val NUM_PAGES = 4
 
 class TrackNewMealActivity  : AppCompatActivity() {
     public lateinit var binding: ActivityNewMealBinding
@@ -39,7 +39,8 @@ class TrackNewMealActivity  : AppCompatActivity() {
             when (position) {
                 0 -> return NewMealAddMealFragment()
                 1 -> return NewMealAddPhotoFragment()
-                2 -> return NewMealServingFragment()
+                2 -> return NewMealPhotoTakenFragment()
+                3 -> return NewMealServingFragment()
             }
             return NewMealAddMealFragment()
         }
