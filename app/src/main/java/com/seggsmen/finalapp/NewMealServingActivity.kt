@@ -1,5 +1,6 @@
 package com.seggsmen.finalapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,6 +39,10 @@ class NewMealServingActivity : AppCompatActivity() {
     }
 
     private fun navigateToNextScreen() {
+        val intent: Intent = Intent(this, FeedPetActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun initPieChart() {

@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/dragToFeedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="256dp"
@@ -110,16 +110,16 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@color/dark_peach"
             app:cardCornerRadius="10sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView15"
-            app:layout_constraintStart_toStartOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView15">
+            app:layout_constraintEnd_toStartOf="@+id/dragToFeedText"
+            app:layout_constraintStart_toStartOf="@+id/dragToFeedText"
+            app:layout_constraintTop_toBottomOf="@+id/dragToFeedText">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/redMeatValueText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -139,9 +139,9 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView16"
-                    app:layout_constraintStart_toStartOf="@+id/textView16"
-                    app:layout_constraintTop_toBottomOf="@+id/textView16"
+                    app:layout_constraintEnd_toEndOf="@+id/redMeatValueText"
+                    app:layout_constraintStart_toStartOf="@+id/redMeatValueText"
+                    app:layout_constraintTop_toBottomOf="@+id/redMeatValueText"
                     app:srcCompat="@drawable/image_gallery" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -156,16 +156,16 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@color/dark_peach"
             app:cardCornerRadius="10sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView15"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView15">
+            app:layout_constraintEnd_toEndOf="@+id/dragToFeedText"
+            app:layout_constraintStart_toEndOf="@+id/dragToFeedText"
+            app:layout_constraintTop_toBottomOf="@+id/dragToFeedText">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/dairyValueText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -185,9 +185,9 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView17"
-                    app:layout_constraintStart_toStartOf="@+id/textView17"
-                    app:layout_constraintTop_toBottomOf="@+id/textView17"
+                    app:layout_constraintEnd_toEndOf="@+id/dairyValueText"
+                    app:layout_constraintStart_toStartOf="@+id/dairyValueText"
+                    app:layout_constraintTop_toBottomOf="@+id/dairyValueText"
                     app:srcCompat="@drawable/camera" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

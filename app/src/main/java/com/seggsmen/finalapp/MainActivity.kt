@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
     private fun cancelTrackMealOverlay() {
         binding.trackMealUnderlay.alpha = 1f
         binding.trackMealOverlayLayer.visibility = View.GONE
-//        binding.pastPetsButton.isClickable = true
-//        binding.pastMealsButton.isClickable = true
-//        binding.trackMealButton.isClickable = true
+        binding.pastPetsButton.isClickable = true
+        binding.pastMealsButton.isClickable = true
+        binding.trackMealButton.isClickable = true
     }
 }

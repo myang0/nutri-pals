@@ -34,7 +34,7 @@
             android:name=".NewMealServingActivity"
             android:exported="true" />
         <activity
-            android:name=".TrackNewMealActivity"
+            android:name=".FeedPetActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
