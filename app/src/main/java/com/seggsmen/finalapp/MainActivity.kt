@@ -1,14 +1,10 @@
 package com.seggsmen.finalapp
 
 import android.content.Intent
-import android.graphics.RenderEffect
-import android.graphics.Shader
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.seggsmen.finalapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToNewMeal() {
-        val intent: Intent = Intent(this, TrackNewMealActivity::class.java)
+        val intent: Intent = Intent(this, NewMealAddMealActivity::class.java)
         startActivity(intent)
     }
 

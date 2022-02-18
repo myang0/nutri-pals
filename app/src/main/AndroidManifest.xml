@@ -22,6 +22,18 @@
             android:name=".ListPastPetsActivity"
             android:exported="true" />
         <activity
+            android:name=".NewMealAddMealActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NewMealAddPhotoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NewMealPhotoTakenActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NewMealServingActivity"
+            android:exported="true" />
+        <activity
             android:name=".TrackNewMealActivity"
             android:exported="true" />
         <activity

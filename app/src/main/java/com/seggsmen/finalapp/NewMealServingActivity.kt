@@ -14,38 +14,30 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
-import com.seggsmen.finalapp.databinding.FragmentNewMealAddPhotoBinding
-import com.seggsmen.finalapp.databinding.FragmentNewMealServingBinding
+import com.seggsmen.finalapp.databinding.ActivityNewMealServingBinding
 
-class NewMealServingFragment : Fragment() {
-    lateinit var binding: FragmentNewMealServingBinding
-    lateinit var pager: ViewPager2
+class NewMealServingActivity : AppCompatActivity() {
+    lateinit var binding: ActivityNewMealServingBinding
     lateinit var pieChart: PieChart
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentNewMealServingBinding.inflate (layoutInflater);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityNewMealServingBinding.inflate (layoutInflater)
+        setContentView(binding.root)
         binding.nextButton.setOnClickListener {navigateToNextScreen()}
 
-        var activity = activity as AppCompatActivity
-        activity.setSupportActionBar(binding.toolbar)
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        pager = activity?.findViewById(R.id.pager)!!
-        binding.toolbar.setNavigationOnClickListener {pager.currentItem = pager.currentItem-1}
+        binding.toolbar.setNavigationOnClickListener {onBackPressed()}
 
         pieChart = binding.nutritionPieChart
         initPieChart()
         setPieChartData()
-
-        return binding.root
     }
 
     private fun navigateToNextScreen() {
-        pager.currentItem = pager.currentItem+1
     }
 
     private fun initPieChart() {
