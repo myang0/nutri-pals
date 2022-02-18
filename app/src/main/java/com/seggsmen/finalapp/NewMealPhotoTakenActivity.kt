@@ -1,11 +1,14 @@
 package com.seggsmen.finalapp
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -24,13 +27,27 @@ class NewMealPhotoTakenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewMealPhotoTakenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.nextButton.setOnClickListener {navigateToNextScreen()}
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.toolbar.setNavigationOnClickListener {onBackPressed()}
+        binding.nextButton.setOnClickListener {navigateToNextScreen()}
+        binding.retakeButton.setOnClickListener {retakePhoto()}
 
+    }
+
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+            val intent: Intent = Intent(this, NewMealPhotoTakenActivity::class.java)
+        }
+    }
+
+    private fun retakePhoto() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        resultLauncher.launch(takePictureIntent)
     }
 
     private fun navigateToNextScreen() {

@@ -226,7 +226,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50sp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/rounded_corners_dark_ripple"
             android:backgroundTint="@color/white"
             android:text="Skip"
             android:textAllCaps="false"

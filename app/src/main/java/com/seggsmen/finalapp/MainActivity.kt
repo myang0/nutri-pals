@@ -9,6 +9,7 @@ import com.seggsmen.finalapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    val animationDuration = (200).toLong()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding.cancelTrackMealButton.setOnClickListener { cancelTrackMealOverlay() }
         binding.newMealButton.setOnClickListener { navigateToNewMeal() }
         binding.savedMealsButton.setOnClickListener { navigateToSavedMeals() }
+        binding.trackMealOverlayLayer.alpha = 0f
     }
 
     private fun navigateToPastPets() {
@@ -38,8 +40,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showBlurAndTrackButton() {
-        binding.trackMealUnderlay.alpha = 0.5f
+        binding.trackMealUnderlay.animate().alpha(0.5f).duration = animationDuration
         binding.trackMealOverlayLayer.visibility = View.VISIBLE
+        binding.trackMealOverlayLayer.animate().alpha(1f).duration = animationDuration
         binding.pastPetsButton.isClickable = false
         binding.pastMealsButton.isClickable = false
         binding.trackMealButton.isClickable = false
@@ -55,8 +58,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun cancelTrackMealOverlay() {
-        binding.trackMealUnderlay.alpha = 1f
-        binding.trackMealOverlayLayer.visibility = View.GONE
+        binding.trackMealUnderlay.animate().alpha(1f).duration = animationDuration
+        binding.trackMealOverlayLayer.animate().alpha(0f).withEndAction{
+            binding.trackMealOverlayLayer.visibility = View.GONE
+        }.duration = animationDuration
+
         binding.pastPetsButton.isClickable = true
         binding.pastMealsButton.isClickable = true
         binding.trackMealButton.isClickable = true

@@ -45,7 +45,8 @@ class NewMealAddPhotoActivity : AppCompatActivity() {
     }
 
     private fun onGalleryClick() {
-        Toast.makeText(this, "Gallery!", Toast.LENGTH_SHORT).show()
+        val openGalleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        resultLauncher.launch(openGalleryIntent)
     }
 
     private fun onCameraClick() {

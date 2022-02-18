@@ -10,7 +10,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/trackMealUnderlay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView2"
@@ -49,6 +53,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#943131"
+            android:background="@drawable/rounded_corners"
             android:src="@drawable/past_meals_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,9 +66,11 @@
             android:layout_width="70sp"
             android:layout_height="75sp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_corners"
             android:backgroundTint="#943131"
             android:src="@drawable/food_icon"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
