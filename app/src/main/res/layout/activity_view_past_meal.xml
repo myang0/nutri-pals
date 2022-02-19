@@ -7,14 +7,29 @@
     android:background="#fff7ef"
     tools:context=".ViewPastMealActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Theme.IAT359FinalApp"
+        app:title="Meal details"
+        app:subtitle="Saved meal"
+        app:titleTextColor="@color/white"
+        app:subtitleTextColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,10 +37,10 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/viewPastMealName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:text="Chicken Fried Rice"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -35,14 +50,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:id="@+id/viewPastMealImage"
+                android:layout_width="0dp"
+                android:layout_height="320dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/bottom_rounded_corners"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/viewPastMealName"
                 app:srcCompat="@drawable/fried_rice_view" />
 
             <TextView
@@ -56,7 +74,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                app:layout_constraintTop_toBottomOf="@+id/viewPastMealImage" />
 
             <LinearLayout
                 android:id="@+id/nutritionPillsRow1"
@@ -90,6 +108,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/viewPastMealVegCount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -119,6 +138,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/viewPastMealFruitCount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -148,6 +168,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/viewPastMealGrainCount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -176,6 +197,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/viewPastMealFishCount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -217,6 +239,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/viewPastMealPoultryCount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -246,6 +269,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/viewPastMealRedMeatCount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -275,6 +299,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/viewPastMealOilCount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -303,6 +328,7 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/viewPastMealDairyCount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -336,7 +362,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/viewPastMealTimesEaten"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -44,22 +44,27 @@
         app:layout_constraintTop_toBottomOf="@+id/nutritionPieChart" />
 
     <HorizontalScrollView
+        android:id="@+id/cardStrollBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="-128dp"
+        android:scrollbarThumbHorizontal="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@+id/dragToFeedText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dragToFeedText"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="bottom"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/vegetableCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="25dp"
@@ -99,6 +104,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/fruitCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="25dp"
@@ -140,6 +146,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/grainCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="25dp"
@@ -181,10 +188,11 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/fishCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/fish_blue_bg"
                 android:layout_marginEnd="25dp"
+                app:cardBackgroundColor="@color/fish_blue_bg"
                 app:cardCornerRadius="13dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -222,6 +230,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/poultryCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="25dp"
@@ -263,6 +272,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/redMeatCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="25dp"
@@ -299,14 +309,15 @@
                         app:layout_constraintEnd_toEndOf="@+id/vegetableValueText"
                         app:layout_constraintStart_toStartOf="@+id/vegetableValueText"
                         app:layout_constraintTop_toBottomOf="@+id/vegetableValueText"
-                        app:srcCompat="@drawable/red_meat_icon"/>
+                        app:srcCompat="@drawable/red_meat_icon" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_marginEnd="25sp"
+                android:id="@+id/oilCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="25sp"
                 app:cardBackgroundColor="@color/oil_yellow_bg"
                 app:cardCornerRadius="13dp">
 
@@ -340,11 +351,12 @@
                         app:layout_constraintEnd_toEndOf="@+id/textView20"
                         app:layout_constraintStart_toStartOf="@+id/textView20"
                         app:layout_constraintTop_toBottomOf="@+id/textView20"
-                        app:srcCompat="@drawable/oil_icon"/>
+                        app:srcCompat="@drawable/oil_icon" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/dairyCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/dairy_blue_bg"

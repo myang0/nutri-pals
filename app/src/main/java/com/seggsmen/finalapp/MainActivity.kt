@@ -26,7 +26,19 @@ class MainActivity : AppCompatActivity() {
         binding.cancelTrackMealButton.setOnClickListener { cancelTrackMealOverlay() }
         binding.newMealButton.setOnClickListener { navigateToNewMeal() }
         binding.savedMealsButton.setOnClickListener { navigateToSavedMeals() }
+        binding.pettingArea.setOnClickListener {bjingusFrown()}
+        binding.pettingArea.post {enablePetting()}
         binding.trackMealOverlayLayer.alpha = 0f
+    }
+
+    private fun enablePetting() {
+    }
+
+    private fun bjingusFrown() {
+        binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_upset_anim)
+        binding.mainActivityBjingus.animate().alpha(1f).withEndAction {
+            binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_happy_anim)
+        }.duration = 1000
     }
 
     private fun navigateToPastPets() {
@@ -43,9 +55,7 @@ class MainActivity : AppCompatActivity() {
         binding.trackMealUnderlay.animate().alpha(0.5f).duration = animationDuration
         binding.trackMealOverlayLayer.visibility = View.VISIBLE
         binding.trackMealOverlayLayer.animate().alpha(1f).duration = animationDuration
-        binding.pastPetsButton.isClickable = false
-        binding.pastMealsButton.isClickable = false
-        binding.trackMealButton.isClickable = false
+        enableUnderlayClickable(false)
     }
 
     private fun navigateToNewMeal() {
@@ -54,7 +64,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToSavedMeals() {
-        Toast.makeText(this, "going to saved meals", Toast.LENGTH_SHORT).show()
+        val intent: Intent = Intent(this, SavedMealsActivity::class.java)
+        startActivity(intent)
     }
 
     private fun cancelTrackMealOverlay() {
@@ -63,8 +74,13 @@ class MainActivity : AppCompatActivity() {
             binding.trackMealOverlayLayer.visibility = View.GONE
         }.duration = animationDuration
 
-        binding.pastPetsButton.isClickable = true
-        binding.pastMealsButton.isClickable = true
-        binding.trackMealButton.isClickable = true
+        enableUnderlayClickable(true)
+    }
+
+    private fun enableUnderlayClickable(boolean: Boolean) {
+        binding.pastPetsButton.isClickable = boolean
+        binding.pastMealsButton.isClickable = boolean
+        binding.trackMealButton.isClickable = boolean
+        binding.pettingArea.isClickable = boolean
     }
 }

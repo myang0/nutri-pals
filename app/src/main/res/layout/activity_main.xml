@@ -63,8 +63,8 @@
 
         <ImageButton
             android:id="@+id/trackMealButton"
-            android:layout_width="70sp"
-            android:layout_height="75sp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/rounded_corners"
@@ -76,23 +76,41 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
-            android:id="@+id/imageView16"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/mainActivityBjingus"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/mainActivityBjingus"
             app:srcCompat="@drawable/bijingus_shadow" />
 
         <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
+            android:id="@+id/mainActivityBjingus"
+            android:layout_width="0dp"
             android:layout_height="350dp"
             android:src="@drawable/bjingus_happy_anim"
+            app:layout_constraintBottom_toTopOf="@+id/trackMealButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+        <FrameLayout
+            android:id="@+id/pettingArea"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="64dp"
+            app:layout_constraintBottom_toBottomOf="@+id/mainActivityBjingus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+
+        </FrameLayout>
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
@@ -100,6 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4">
@@ -486,6 +505,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="48dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Status:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/statusValueText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="Happy"
+            app:layout_constraintBottom_toBottomOf="@+id/statusText"
+            app:layout_constraintStart_toEndOf="@+id/statusText"
+            app:layout_constraintTop_toTopOf="@+id/statusText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,6 +31,7 @@ class FeedPetActivity : AppCompatActivity() {
         snack.post {
             setSnackDraggable()
         }
+
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {

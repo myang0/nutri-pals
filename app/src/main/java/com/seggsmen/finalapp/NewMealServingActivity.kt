@@ -1,14 +1,15 @@
 package com.seggsmen.finalapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
+import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
+import androidx.cardview.widget.CardView
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -16,11 +17,16 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.seggsmen.finalapp.databinding.ActivityNewMealServingBinding
+import android.view.View.OnTouchListener
+
+
+
 
 class NewMealServingActivity : AppCompatActivity() {
     lateinit var binding: ActivityNewMealServingBinding
     lateinit var pieChart: PieChart
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,8 +42,10 @@ class NewMealServingActivity : AppCompatActivity() {
         pieChart = binding.nutritionPieChart
         initPieChart()
         setPieChartData()
+        binding.dairyCard.post {
+            setFoodTilesDraggable()
+        }
     }
-
     private fun navigateToNextScreen() {
         val intent: Intent = Intent(this, FeedPetActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -91,5 +99,102 @@ class NewMealServingActivity : AppCompatActivity() {
         pieChart.animateY(1400, Easing.EaseInOutQuad)
 
         pieChart.invalidate()
+    }
+
+    var foodCardInitialPosArr = Array(8) {FloatArray(2)}
+    var touchPos = FloatArray(2)
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setFoodTilesDraggable() {
+        var pieChartPositionArr = IntArray(2)
+        pieChart.getLocationOnScreen(pieChartPositionArr)
+        var foodCards = ArrayList<CardView>()
+        foodCards.add(binding.vegetableCard)
+        foodCards.add(binding.fruitCard)
+        foodCards.add(binding.grainCard)
+        foodCards.add(binding.fishCard)
+        foodCards.add(binding.poultryCard)
+        foodCards.add(binding.redMeatCard)
+        foodCards.add(binding.oilCard)
+        foodCards.add(binding.dairyCard)
+
+        var foodLocationArr = Array(8) {IntArray(2)}
+        for ((index, card) in foodCards.withIndex()) {
+            card.getLocationInWindow(foodLocationArr[index])
+            foodCardInitialPosArr[index][0] = foodLocationArr[index][0].toFloat() - card.height*0.14f
+            foodCardInitialPosArr[index][1] = foodLocationArr[index][1].toFloat() - card.height*0.75f
+            card.x = foodCardInitialPosArr[index][0]
+            card.y = foodCardInitialPosArr[index][1]
+            Log.d("shark", card.resources.getResourceName(card.id) + "Initial Pos [" + foodCardInitialPosArr[index][0] + ", " + foodCardInitialPosArr[index][1] + "]")
+
+            card.setOnTouchListener { view, event ->
+                view.parent.requestDisallowInterceptTouchEvent(true)
+                var newX = 0f
+                var newY = 0f
+
+                when (event.actionMasked) {
+                    MotionEvent.ACTION_DOWN -> {
+                        touchPos[0] = event.x
+                        touchPos[1] = event.y
+                        Log.d("shark", card.resources.getResourceName(card.id) + "Down Pos [" + touchPos[0] + ", " + touchPos[1] + "]")
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        newX = event.x
+                        newY = event.y
+
+                        card.x += newX - touchPos[0]
+                        card.y += newY - touchPos[1]
+                    }
+                    MotionEvent.ACTION_CANCEL -> {
+                        Log.d("shark", "CANCELED")
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if (card.x > pieChartPositionArr[0]
+                            && card.x < pieChartPositionArr[0] + pieChart.width/2
+                            && card.y > pieChartPositionArr[1]
+                            && card.y < pieChartPositionArr[1] + pieChart.height/2) {
+                            onDragCardToChart(card)
+                        } else {
+                            card.x = foodCardInitialPosArr[index][0]
+                            card.y = foodCardInitialPosArr[index][1]
+                        }
+                        Log.d("shark", "UP")
+                    }
+                }
+                true
+            }
+        }
+    }
+
+    private fun onDragCardToChart(card: CardView) {
+        when (card.id) {
+            binding.vegetableCard.id -> {
+                Toast.makeText(this, "Vegetable", Toast.LENGTH_SHORT).show()
+            }
+            binding.fruitCard.id -> {
+                Toast.makeText(this, "Fruit", Toast.LENGTH_SHORT).show()
+            }
+            binding.grainCard.id -> {
+                Toast.makeText(this, "Grain", Toast.LENGTH_SHORT).show()
+            }
+            binding.fishCard.id -> {
+                Toast.makeText(this, "Fish", Toast.LENGTH_SHORT).show()
+            }
+            binding.poultryCard.id -> {
+                Toast.makeText(this, "Poultry", Toast.LENGTH_SHORT).show()
+            }
+            binding.redMeatCard.id -> {
+                Toast.makeText(this, "Red Meat", Toast.LENGTH_SHORT).show()
+            }
+            binding.oilCard.id -> {
+                Toast.makeText(this, "Healthy Oil", Toast.LENGTH_SHORT).show()
+            }
+            binding.dairyCard.id -> {
+                Toast.makeText(this, "Dairy", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Toast.makeText(this, "INVALID CARD DRAGGED ONTO CHART", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
