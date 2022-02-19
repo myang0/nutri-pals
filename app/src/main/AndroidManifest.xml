@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IAT359FinalApp">
         <activity
+            android:name=".OnboardingActivity"
+            android:exported="true" />
+        <activity
             android:name=".ViewPastMealActivity"
             android:exported="true" />
         <activity
