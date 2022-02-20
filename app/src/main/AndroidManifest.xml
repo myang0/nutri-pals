@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IAT359FinalApp">
         <activity
-            android:name=".OnboardingActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".ViewPastMealActivity"
@@ -46,7 +46,7 @@
             android:name=".MealLibraryActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".OnboardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
