@@ -32,7 +32,7 @@ class NewMealAddPhotoActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {onBackPressed()}
         binding.galleryButton.setOnClickListener {onGalleryClick()}
         binding.cameraButton.setOnClickListener {onCameraClick()}
-
+        binding.indicator.createIndicators(3, 1)
     }
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

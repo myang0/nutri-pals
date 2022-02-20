@@ -1,5 +1,9 @@
 package com.seggsmen.finalapp.logic
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class SavedMeal(
 
     val name: String = "<no name>",
@@ -13,4 +17,4 @@ data class SavedMeal(
     val oilServings: Int = -1,
     val dairyServings: Int = -1,
     val timesEaten: Int = -1,
-)
+) : Parcelable

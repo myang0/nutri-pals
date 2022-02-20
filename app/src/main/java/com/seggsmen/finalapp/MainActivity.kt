@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToPastMeals() {
-        val intent: Intent = Intent(this, ListPastMealsActivity::class.java)
+        val intent: Intent = Intent(this, MealLibraryActivity::class.java)
         startActivity(intent)
     }
 

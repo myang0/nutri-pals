@@ -26,7 +26,8 @@
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_feed_pet.xml" value="0.4" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_list_past_meals.xml" value="0.264" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_list_past_pets.xml" value="0.4041666666666667" />
-        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_meal_library.xml" value="0.4" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_new_meal.xml" value="0.264" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_new_meal_add_meal.xml" value="0.4041666666666667" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_new_meal_add_photo.xml" value="0.4" />
@@ -35,8 +36,14 @@
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_saved_meals.xml" value="0.4" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_view_past_meal.xml" value="0.4" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_view_past_pet.xml" value="0.4041666666666667" />
-        <entry key="..\:/iat-359-final/app/src/main/res/layout/card_saved_meal_row.xml" value="0.1" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/backuplibrarymealfrag.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/card_meal_library.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/card_saved_meal_row.xml" value="0.8" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_add_new_meal.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_meal_library.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_meal_library_meal.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_meal_library_page.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_meal_library_test.xml" value="0.4041666666666667" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_new_meal_add_meal.xml" value="0.4" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_new_meal_add_photo.xml" value="0.4" />
         <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_new_meal_photo_taken.xml" value="0.4005208333333333" />

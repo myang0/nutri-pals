@@ -29,7 +29,7 @@ class NewMealAddMealActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener {onBackPressed()}
-
+        binding.indicator.createIndicators(3, 0)
     }
 
     private fun navigateToNextScreen() {

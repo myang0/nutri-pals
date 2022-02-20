@@ -18,17 +18,18 @@ import com.seggsmen.finalapp.R
 import com.seggsmen.finalapp.ViewPastMealActivity
 import com.seggsmen.finalapp.databinding.CardSavedMealRowBinding
 
-class SavedMealListAdapter(private val meals: List<SavedMeal>, private val context: Context) :
-
+class SavedMealListAdapter(private val meals: List<SavedMeal>, private val context: Context, private val listener: (position: Int) -> Unit) :
     RecyclerView.Adapter<SavedMealListAdapter.ViewHolder>() {
+
     var selectedPos = RecyclerView.NO_ID.toInt()
 
+    //Define variables for view that can be accessed in onBindViewHolder()
     inner class ViewHolder(binding: CardSavedMealRowBinding) : RecyclerView.ViewHolder(binding.root) {
         val mealName: TextView = binding.textView15
         val mealImage: ImageView = binding.imageView2
-        val cardView: CardView = binding.cardView
     }
 
+    //Initial construction
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding = CardSavedMealRowBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false)
@@ -36,38 +37,48 @@ class SavedMealListAdapter(private val meals: List<SavedMeal>, private val conte
         return ViewHolder(binding)
     }
 
+    //Called after construction, whenever view is loaded onto screen, and whenever notified
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.mealName.text = meals[position].name
         viewHolder.mealImage.setImageDrawable(ContextCompat.getDrawable(viewHolder.mealImage.context, meals[position].image))
-//        viewHolder.cardView.isSelected = selectedPos == position
-
+            if (selectedPos == position) {
+                viewHolder.itemView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.dark_peach)
+            } else {
+                viewHolder.itemView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.peach)
+            }
 
         viewHolder.itemView.setOnClickListener {
-            val intent: Intent = Intent(context, ViewPastMealActivity::class.java)
-            intent.putExtra("name", meals[position].name)
-            intent.putExtra("image_id", meals[position].image)
-            intent.putExtra("vegetable", meals[position].vegetableServings)
-            intent.putExtra("fruit", meals[position].fruitServings)
-            intent.putExtra("grain", meals[position].grainServings)
-            intent.putExtra("fish", meals[position].fishServings)
-            intent.putExtra("poultry", meals[position].poultryServings)
-            intent.putExtra("red_meat", meals[position].redMeatServings)
-            intent.putExtra("oil", meals[position].oilServings)
-            intent.putExtra("dairy", meals[position].dairyServings)
-            intent.putExtra("times_eaten", meals[position].timesEaten)
-            context.startActivity(intent)
-//            Toast.makeText(context, meals[position].name, Toast.LENGTH_SHORT).show()
-////            notifyItemChanged(position)
-//            selectedPos = position
-//            viewHolder.itemView.isSelected = selectedPos == position
-//            selectedPos = position
-//            if (selectedPos == position) {
-//                viewHolder.itemView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.dark_peach)
-//            } else {
-//                viewHolder.itemView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.peach)
-//            }
+            val oldPos = selectedPos
+            selectedPos = position
+            notifyItemChanged(position)
+            notifyItemChanged(oldPos)
+            listener.invoke(position)
         }
     }
 
     override fun getItemCount() = meals.size
+
+    public fun isFoodSelected(): Boolean {
+        return when {
+            selectedPos < 0 -> {
+                false
+            }
+            selectedPos > meals.size-1 -> {
+                false
+            }
+            else -> {
+                true
+            }
+        }
+    }
+    public fun getSelectedFood(): SavedMeal? {
+         return when {
+            selectedPos < 0 -> {
+                null
+            }
+            else -> {
+                meals[selectedPos]
+            }
+        }
+    }
 }

@@ -40,6 +40,9 @@
             android:name=".SavedMealsActivity"
             android:exported="true" />
         <activity
+            android:name=".MealLibraryActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

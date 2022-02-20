@@ -23,6 +23,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:gravity="center_vertical"
+            android:fontFamily="@font/dm_sans"
             android:text="Bjïngus"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -515,6 +516,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:fontFamily="@font/dm_sans"
             android:text="Status:"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

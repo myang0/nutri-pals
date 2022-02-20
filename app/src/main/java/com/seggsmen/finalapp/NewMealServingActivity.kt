@@ -45,6 +45,7 @@ class NewMealServingActivity : AppCompatActivity() {
         binding.dairyCard.post {
             setFoodTilesDraggable()
         }
+        binding.indicator.createIndicators(3, 2)
     }
     private fun navigateToNextScreen() {
         val intent: Intent = Intent(this, FeedPetActivity::class.java)
