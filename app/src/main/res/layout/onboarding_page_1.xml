@@ -37,7 +37,7 @@
         android:id="@+id/firstNextButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="32dp"
         android:letterSpacing="0.01"
         android:text="Next"
         android:textAllCaps="false"

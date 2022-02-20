@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToPastPets() {
-        val intent: Intent = Intent(this, ListPastPetsActivity::class.java)
+        val intent: Intent = Intent(this, OnboardingActivity::class.java)
         startActivity(intent)
     }
 

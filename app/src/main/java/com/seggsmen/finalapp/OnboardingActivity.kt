@@ -52,6 +52,7 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         viewPager = binding.viewPager
         viewPager.isUserInputEnabled = false
         viewPager.adapter = OnboardingAdapter(onboardingFragments, this)
+        binding.indicator.setViewPager(viewPager)
     }
 
     override fun onNextButtonPressed() {
