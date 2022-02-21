@@ -7,4 +7,25 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_peach">#F7DBC1</color>
+    <color name="peach">#FFF7EF</color>
+    <color name="peachier_peach">#FDF0E5</color>
+    <color name="red">#943131</color>
+    <color name="vegetable_green_bg">#D1E5BC</color>
+    <color name="vegetable_green">#539B27</color>
+    <color name="fruit_red_bg">#FADAD4</color>
+    <color name="fruit_red">#E2644F</color>
+    <color name="grain_yellow_bg">#F6EDBE</color>
+    <color name="grain_yellow">#C7AD2B</color>
+    <color name="fish_blue_bg">#E6F1F2</color>
+    <color name="fish_blue">#4EA4AD</color>
+    <color name="poultry_orange_bg">#FCE5D1</color>
+    <color name="poultry_orange">#C57923</color>
+    <color name="red_meat_red_bg">#F5E5E1</color>
+    <color name="red_meat_red">#CA502E</color>
+    <color name="oil_yellow_bg">#F3ECD8</color>
+    <color name="oil_yellow">#EBC351</color>
+    <color name="dairy_blue_bg">#E7EBF3</color>
+    <color name="dairy_blue">#4E77C1</color>
+    <color name="grey">#D3D3D3</color>
 </resources>

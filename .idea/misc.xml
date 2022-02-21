@@ -10,12 +10,50 @@
         <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/drawable/rounded_corners.xml" value="0.3828125" />
         <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/drawable/rounded_ripple_button.xml" value="0.3828125" />
         <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/drawable/top_rounded_corners.xml" value="0.3828125" />
-        <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/layout/activity_list_past_meals.xml" value="0.264" />
         <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/layout/activity_list_past_pets.xml" value="0.4" />
         <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/layout/activity_past_pets.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/layout/activity_view_past_meal.xml" value="0.4" />
         <entry key="..\:/Users/mwyan/AndroidStudioProjects/IAT359FinalApp/app/src/main/res/layout/activity_view_past_pet.xml" value="0.264" />
+        <entry key="..\:/iat-359-final/app/src/main/res/drawable/btn_bg.xml" value="0.4203125" />
+        <entry key="..\:/iat-359-final/app/src/main/res/drawable/dark_peach_focused.xml" value="0.4203125" />
+        <entry key="..\:/iat-359-final/app/src/main/res/drawable/ripple.xml" value="0.4203125" />
+        <entry key="..\:/iat-359-final/app/src/main/res/drawable/rounded_corners.xml" value="0.4203125" />
+        <entry key="..\:/iat-359-final/app/src/main/res/drawable/rounded_corners_dark_ripple.xml" value="0.4203125" />
+        <entry key="..\:/iat-359-final/app/src/main/res/drawable/rounded_corners_white.xml" value="0.4203125" />
+        <entry key="..\:/iat-359-final/app/src/main/res/drawable/shape.xml" value="0.4203125" />
+        <entry key="..\:/iat-359-final/app/src/main/res/font/dm_sans.xml" value="0.434375" />
+        <entry key="..\:/iat-359-final/app/src/main/res/font/dm_sans_regular.xml" value="0.434375" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_feed_pet.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_list_past_meals.xml" value="0.264" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_list_past_pets.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_meal_library.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_new_meal.xml" value="0.264" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_new_meal_add_meal.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_new_meal_add_photo.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_new_meal_photo_taken.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_new_meal_serving.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_onboarding.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_saved_meals.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_view_past_meal.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/activity_view_past_pet.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/backuplibrarymealfrag.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/card_meal_library.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/card_saved_meal_row.xml" value="0.8" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_add_new_meal.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_meal_library.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_meal_library_meal.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_meal_library_page.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_meal_library_test.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_new_meal_add_meal.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_new_meal_add_photo.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_new_meal_photo_taken.xml" value="0.4005208333333333" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/fragment_new_meal_serving.xml" value="0.4" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/onboarding_page_1.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/onboarding_page_2.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/onboarding_page_3.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/onboarding_page_4.xml" value="0.4041666666666667" />
+        <entry key="..\:/iat-359-final/app/src/main/res/layout/onboarding_page_5.xml" value="0.4041666666666667" />
       </map>
     </option>
   </component>

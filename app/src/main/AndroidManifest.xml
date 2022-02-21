@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IAT359FinalApp">
         <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
             android:name=".ViewPastMealActivity"
             android:exported="true" />
         <activity
@@ -22,7 +25,28 @@
             android:name=".ListPastPetsActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".NewMealAddMealActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NewMealAddPhotoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NewMealPhotoTakenActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NewMealServingActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FeedPetActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SavedMealsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MealLibraryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".OnboardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,5 +55,8 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
 
 </manifest>

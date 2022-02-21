@@ -15,11 +15,8 @@ class ListPastMealsActivity : AppCompatActivity() {
         binding = ActivityListPastMealsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var actionBar : ActionBar? = this.supportActionBar
-
-        actionBar?.setTitle("Meal Library")
-        actionBar?.setSubtitle("Saved Meals")
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(binding.toolbar2)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.pastMealListing.setOnClickListener { navigateToPastMealView() }
     }
