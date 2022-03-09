@@ -4,10 +4,13 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class SavedMeal(
+data class NewMeal(
 
     var name: String = "<no name>",
     var image: Int = -1,
+    var portionSize: String = Const.NO_VALUE_SELECTED,
+    var feeling: String = Const.NO_VALUE_SELECTED,
+    var isAddToSavedMeal: Boolean = false,
     var vegetableServings: Int = -1,
     var fruitServings: Int = -1,
     var grainServings: Int = -1,

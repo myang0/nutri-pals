@@ -4,15 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
-import com.seggsmen.finalapp.databinding.ActivityListPastMealsBinding
+import com.seggsmen.finalapp.databinding.ObsoleteActivityListPastMealsBinding
 
-class ListPastMealsActivity : AppCompatActivity() {
-    lateinit var binding: ActivityListPastMealsBinding
+class ObsoleteListPastMealsActivity : AppCompatActivity() {
+    lateinit var binding: ObsoleteActivityListPastMealsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityListPastMealsBinding.inflate(layoutInflater)
+        binding = ObsoleteActivityListPastMealsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar2)

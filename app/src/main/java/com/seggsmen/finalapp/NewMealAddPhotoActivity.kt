@@ -1,21 +1,14 @@
 package com.seggsmen.finalapp
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import androidx.core.app.ActivityCompat.startActivityForResult
 import com.seggsmen.finalapp.databinding.ActivityNewMealAddPhotoBinding
+import com.seggsmen.finalapp.logic.Const
+import com.seggsmen.finalapp.logic.NewMeal
 
 class NewMealAddPhotoActivity : AppCompatActivity() {
     lateinit var binding: ActivityNewMealAddPhotoBinding
@@ -33,14 +26,17 @@ class NewMealAddPhotoActivity : AppCompatActivity() {
         binding.galleryButton.setOnClickListener {onGalleryClick()}
         binding.cameraButton.setOnClickListener {onCameraClick()}
         binding.indicator.createIndicators(3, 1)
+
     }
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            // There are no request codes
+
             val data: Intent? = result.data
-            val intent: Intent = Intent(this, NewMealPhotoTakenActivity::class.java)
-            startActivity(intent)
+            val newIntent = Intent(this, NewMealPhotoTakenActivity::class.java)
+            newIntent.putExtra(Const.EXTRA_CODE_IMAGE_TAKEN, data)
+            newIntent.putExtra(Const.EXTRA_CODE_NEW_MEAL,intent.getParcelableExtra<NewMeal>(Const.EXTRA_CODE_NEW_MEAL))
+            startActivity(newIntent)
         }
     }
 
@@ -55,7 +51,8 @@ class NewMealAddPhotoActivity : AppCompatActivity() {
     }
 
     private fun onSkipClick() {
-        val intent: Intent = Intent(this, NewMealServingActivity::class.java)
+        val intent = Intent(this, NewMealServingActivity::class.java)
+        intent.putExtra(Const.EXTRA_CODE_NEW_MEAL,intent.getParcelableExtra<NewMeal>(Const.EXTRA_CODE_NEW_MEAL))
         startActivity(intent)
     }
 }

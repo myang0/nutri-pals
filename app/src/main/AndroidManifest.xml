@@ -11,12 +11,17 @@
         android:theme="@style/Theme.IAT359FinalApp">
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ViewPastMealActivity"
             android:exported="true" />
         <activity
-            android:name=".ListPastMealsActivity"
+            android:name=".ObsoleteListPastMealsActivity"
             android:exported="true" />
         <activity
             android:name=".ViewPastPetActivity"
@@ -47,13 +52,7 @@
             android:exported="true" />
         <activity
             android:name=".OnboardingActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"/>
     </application>
 
     <uses-feature android:name="android.hardware.camera"

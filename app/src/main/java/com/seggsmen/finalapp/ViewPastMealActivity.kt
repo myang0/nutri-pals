@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
-import com.seggsmen.finalapp.databinding.ActivityListPastMealsBinding
 import com.seggsmen.finalapp.databinding.ActivityViewPastMealBinding
 import com.seggsmen.finalapp.logic.SavedMeal
 import com.seggsmen.finalapp.logic.SavedMealListAdapter

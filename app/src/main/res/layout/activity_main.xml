@@ -68,7 +68,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_corners"
             android:backgroundTint="#943131"
             android:src="@drawable/food_icon"

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.IAT359FinalApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.IAT359FinalApp" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#943131</item>
         <item name="colorPrimaryVariant">#6A2424</item>
@@ -14,5 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/dm_sans</item>
         <item name="colorControlNormal">@color/white</item>
+    </style>
+    <style name="Theme.IAT359FinalApp.Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/rounded_corners</item>
+        <item name="textAllCaps">false</item>
     </style>
 </resources>

@@ -2,23 +2,15 @@ package com.seggsmen.finalapp
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.seggsmen.finalapp.databinding.ActivityNewMealPhotoTakenBinding
+import com.seggsmen.finalapp.logic.Const
+import com.seggsmen.finalapp.logic.NewMeal
 
 class NewMealPhotoTakenActivity : AppCompatActivity() {
     lateinit var binding: ActivityNewMealPhotoTakenBinding
@@ -32,16 +24,31 @@ class NewMealPhotoTakenActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.toolbar.setNavigationOnClickListener {onBackPressed()}
-        binding.nextButton.setOnClickListener {navigateToNextScreen()}
+        binding.nextButton.setOnClickListener {loadNextActivity()}
         binding.retakeButton.setOnClickListener {retakePhoto()}
+
+        loadImageFromPrevActivity()
+    }
+
+    private fun loadImageFromPrevActivity() {
+        val loadedIntent = intent.getParcelableExtra<Intent?>(Const.EXTRA_CODE_IMAGE_TAKEN)
+
+        // It is has image uri aka it is from gallery
+        if (loadedIntent?.data != null) {
+            binding.photoTakenPreview.setImageURI(loadedIntent.data!!)
+
+        // No image uri aka from camera
+        } else {
+            binding.photoTakenPreview.setImageBitmap(loadedIntent?.extras?.get("data") as Bitmap)
+        }
 
     }
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
-            val data: Intent? = result.data
-            val intent: Intent = Intent(this, NewMealPhotoTakenActivity::class.java)
+            val imageData: Intent? = result.data
+            binding.photoTakenPreview.setImageBitmap(imageData?.extras?.get("data") as Bitmap)
         }
     }
 
@@ -50,8 +57,17 @@ class NewMealPhotoTakenActivity : AppCompatActivity() {
         resultLauncher.launch(takePictureIntent)
     }
 
-    private fun navigateToNextScreen() {
-        val intent: Intent = Intent(this, NewMealServingActivity::class.java)
-        startActivity(intent)
+    private fun loadNextActivity() {
+        val newMeal = intent.getParcelableExtra<NewMeal>(Const.EXTRA_CODE_NEW_MEAL)
+        //To-do: Upload image from binding.photoTakenPreview to Firebase
+        //       Save image key to NewMeal object
+
+        val newIntent = Intent(this, NewMealServingActivity::class.java)
+        intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, newMeal)
+        startActivity(newIntent)
+    }
+
+    override fun onBackPressed() {
+
     }
 }
