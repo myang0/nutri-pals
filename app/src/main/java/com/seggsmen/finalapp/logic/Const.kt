@@ -16,7 +16,7 @@ object Const {
     // Intent codes for new meal
     const val EXTRA_CODE_NEW_MEAL = "NEW MEAL"
     const val EXTRA_CODE_IMAGE_TAKEN = "IMAGE TAKEN"
-    const val NO_VALUE_SELECTED = "NO VALUE SELECTED"
+    const val STRING_NO_VALUE = "NO VALUE SELECTED"
 
     // Shared Preferences
     const val SHARED_PREFS_NAME = "IAT359Final"
@@ -28,4 +28,5 @@ object Const {
     // Firebase Database Keys
     const val DB_USERS = "Users"
     const val DB_PETNAMES = "PetName"
+    const val DB_SAVED_MEALS = "SavedMeals"
 }

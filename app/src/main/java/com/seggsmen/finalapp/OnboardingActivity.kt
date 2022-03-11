@@ -5,13 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.database.*
@@ -32,8 +26,8 @@ interface OnboardingListener {
 
 class OnboardingActivity : AppCompatActivity(), OnboardingListener {
     lateinit var binding: ActivityOnboardingBinding
-
     lateinit var viewPager: ViewPager2
+    var isSkipOnboarding = false
 
     val onboardingFragments: Array<Fragment> = arrayOf(
         FirstOnboardingPageFragment(),
@@ -47,22 +41,9 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        skipOnboardIfUserKeyPresent()
-        binding = ActivityOnboardingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        this.supportActionBar?.hide()
-
-        viewPager = binding.viewPager
-        viewPager.isUserInputEnabled = false
-        viewPager.adapter = OnboardingAdapter(onboardingFragments, this)
-        binding.indicator.setViewPager(viewPager)
-    }
-
-    private fun skipOnboardIfUserKeyPresent() {
         // Get necessary references
         val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-        val userKey = sharedPrefs.getString(Const.USER_KEY, Const.NO_VALUE_SELECTED)
+        val userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)
         val usersRef = Firebase.database.getReference(Const.DB_USERS)
 
         // Query the database for the user key taken from shared prefs
@@ -70,12 +51,16 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.value == null) {
                     Log.d(Const.LOG, "USER KEY [${userKey}] IS INVALID")
+                    // Do not show content view
+                    isSkipOnboarding = true
 
                     // Remove the key
                     with(sharedPrefs.edit()) {
                         remove(Const.USER_KEY)
                         apply()
                     }
+
+                    showContentView()
                 } else {
                     // Skip onboarding
                     Log.d(Const.LOG, "USER KEY [${userKey}] IS VALID")
@@ -86,9 +71,22 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
+//        skipOnboardIfUserKeyPresent()
+
+    }
+
+    private fun showContentView() {
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        this.supportActionBar?.hide()
+
+        viewPager = binding.viewPager
+        viewPager.isUserInputEnabled = false
+        viewPager.adapter = OnboardingAdapter(onboardingFragments, this)
+        binding.indicator.setViewPager(viewPager)
     }
 
     override fun onNextButtonPressed() {
@@ -113,7 +111,7 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         val userKey = userDataRef.push()
         val petName = userKey.child(Const.DB_PETNAMES)
 
-        // To-do: Set pet name here.
+        // TODO: Set pet name here.
         petName.setValue("Bjingus")
 
         // Save user key to shared prefs

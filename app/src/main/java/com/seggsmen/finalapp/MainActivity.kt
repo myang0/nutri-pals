@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun enablePetting() {
-        // To-do: Bjingus petting tingz
+        // TODO: Bjingus petting tingz
     }
 
     private fun bjingusFrown() {

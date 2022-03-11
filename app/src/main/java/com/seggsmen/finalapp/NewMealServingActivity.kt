@@ -1,6 +1,7 @@
 package com.seggsmen.finalapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -18,8 +19,10 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.seggsmen.finalapp.databinding.ActivityNewMealServingBinding
 import android.view.View.OnTouchListener
-
-
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.seggsmen.finalapp.logic.Const
+import com.seggsmen.finalapp.logic.NewMeal
 
 
 class NewMealServingActivity : AppCompatActivity() {
@@ -48,8 +51,29 @@ class NewMealServingActivity : AppCompatActivity() {
         binding.indicator.createIndicators(3, 2)
     }
     private fun navigateToNextScreen() {
-        val intent: Intent = Intent(this, FeedPetActivity::class.java)
+        //TODO: Set proper serving values
+        val newMeal = intent.getParcelableExtra<NewMeal>(Const.EXTRA_CODE_NEW_MEAL)
+
+        newMeal!!.timesEaten = 1
+        newMeal.vegetableServings = 69
+        newMeal.fruitServings = 0
+        newMeal.grainServings = 0
+        newMeal.fishServings = 0
+        newMeal.poultryServings = 0
+        newMeal.redMeatServings = 0
+        newMeal.oilServings = 0
+        newMeal.dairyServings = 0
+
+        val databaseRef = Firebase.database
+        val userDataRef = databaseRef.getReference(Const.DB_USERS)
+
+        val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        val userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)
+        userDataRef.child(userKey!!).child(Const.DB_SAVED_MEALS).child(newMeal.name).setValue(newMeal)
+
+        val intent = Intent(this, FeedPetActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, newMeal)
         startActivity(intent)
         finish()
     }

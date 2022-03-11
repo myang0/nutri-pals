@@ -49,8 +49,8 @@ class NewMealAddMealActivity : AppCompatActivity() {
 
     private fun updateNextButtonState() {
         if (binding.mealNameInput.text.isNotEmpty()
-            and (getPortionSize() != Const.NO_VALUE_SELECTED)
-            and (getFeeling() != Const.NO_VALUE_SELECTED)) {
+            and (getPortionSize() != Const.STRING_NO_VALUE)
+            and (getFeeling() != Const.STRING_NO_VALUE)) {
 
             binding.nextButton.alpha = 1f
             binding.nextButton.isClickable = true
@@ -108,7 +108,7 @@ class NewMealAddMealActivity : AppCompatActivity() {
             binding.mediumPortionCard.alpha == 1f -> return Const.PORTION_MEDIUM
             binding.largePortionCard.alpha == 1f -> return Const.PORTION_LARGE
         }
-        return Const.NO_VALUE_SELECTED
+        return Const.STRING_NO_VALUE
     }
 
     private fun getFeeling(): String {
@@ -119,6 +119,6 @@ class NewMealAddMealActivity : AppCompatActivity() {
             binding.happyFeelingButton.alpha == 1f -> return Const.FEELING_HAPPY
             binding.smilingFeelingButton.alpha == 1f -> return Const.FEELING_SMILING
         }
-        return Const.NO_VALUE_SELECTED
+        return Const.STRING_NO_VALUE
     }
 }

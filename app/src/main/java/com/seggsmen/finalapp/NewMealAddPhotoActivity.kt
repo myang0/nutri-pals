@@ -51,8 +51,8 @@ class NewMealAddPhotoActivity : AppCompatActivity() {
     }
 
     private fun onSkipClick() {
-        val intent = Intent(this, NewMealServingActivity::class.java)
-        intent.putExtra(Const.EXTRA_CODE_NEW_MEAL,intent.getParcelableExtra<NewMeal>(Const.EXTRA_CODE_NEW_MEAL))
-        startActivity(intent)
+        val newIntent = Intent(this, NewMealServingActivity::class.java)
+        newIntent.putExtra(Const.EXTRA_CODE_NEW_MEAL, intent.getParcelableExtra<NewMeal>(Const.EXTRA_CODE_NEW_MEAL))
+        startActivity(newIntent)
     }
 }
