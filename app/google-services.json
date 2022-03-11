@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "254974406096",
+    "project_id": "iat359final",
+    "storage_bucket": "iat359final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254974406096:android:537f2bab23395938105dd5",
+        "android_client_info": {
+          "package_name": "com.seggsmen.finalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254974406096-mv3jra4d8gi49a8kg088uu7t17g36nb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeTamW8v_u1fCHjIfp1PnWPK5x-0cx_vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254974406096-mv3jra4d8gi49a8kg088uu7t17g36nb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

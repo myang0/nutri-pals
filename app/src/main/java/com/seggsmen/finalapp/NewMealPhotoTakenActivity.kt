@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import com.seggsmen.finalapp.databinding.ActivityNewMealPhotoTakenBinding
 import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.NewMeal

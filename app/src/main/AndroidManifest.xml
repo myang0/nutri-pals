@@ -11,12 +11,7 @@
         android:theme="@style/Theme.IAT359FinalApp">
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ViewPastMealActivity"
             android:exported="true" />
@@ -52,7 +47,12 @@
             android:exported="true" />
         <activity
             android:name=".OnboardingActivity"
-            android:exported="true"/>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
     <uses-feature android:name="android.hardware.camera"

@@ -1,11 +1,19 @@
 package com.seggsmen.finalapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.databinding.ActivityMainBinding
+import com.seggsmen.finalapp.logic.Const
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -32,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun enablePetting() {
+        // To-do: Bjingus petting tingz
     }
 
     private fun bjingusFrown() {
