@@ -46,7 +46,7 @@ class FeedPetActivity : AppCompatActivity() {
 
     private fun onSnackEat() {
         snack.visibility = View.GONE
-        binding.dragToFeedText.visibility = View.INVISIBLE
+        binding.clickToFeedText.visibility = View.INVISIBLE
         bjingus.setImageResource(R.drawable.bjingus_smiling_anim)
 
         binding.bjingusHappyText.visibility = View.VISIBLE
