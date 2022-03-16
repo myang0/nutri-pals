@@ -20,28 +20,40 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.seggsmen.finalapp.databinding.ActivityNewMealServingBinding
 import android.view.View.OnTouchListener
 import android.widget.TextView
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.NewMeal
+import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.floor
 
 class NewMealServingActivity : AppCompatActivity() {
-    lateinit var dragDestinationText: TextView
-
     lateinit var binding: ActivityNewMealServingBinding
     lateinit var pieChart: PieChart
 
-    val pieDataColors: ArrayList<Int> = arrayListOf<Int>(
-        Color.parseColor("#4a8427"),
-        Color.parseColor("#e2644f"),
-        Color.parseColor("#c7ad2b"),
-        Color.parseColor("#4ea4ad"),
-        Color.parseColor("#c57923"),
-        Color.parseColor("#ca502e"),
-        Color.parseColor("#ebc351"),
-        Color.parseColor("#4e77c1"),
+    private val colorMap: Map<String, Int> = mapOf(
+        "vegetable" to Color.parseColor("#4a8427"),
+        "fruit" to Color.parseColor("#e2644f"),
+        "grain" to Color.parseColor("#c7ad2b"),
+        "fish" to Color.parseColor("#4ea4ad"),
+        "poultry" to Color.parseColor("#c57923"),
+        "redMeat" to Color.parseColor("#ca502e"),
+        "oil" to Color.parseColor("#ebc351"),
+        "dairy" to Color.parseColor("#4e77c1"),
+    )
+
+    private val foodGroupDisplayNameMap: Map<String, String> = mapOf(
+        "vegetable" to "Vegetables",
+        "fruit" to "Fruits",
+        "grain" to "Grains",
+        "fish" to "Fish",
+        "poultry" to "Poultry",
+        "redMeat" to "Red Meat",
+        "oil" to "Healthy Oils",
+        "dairy" to "Dairy",
     )
 
     lateinit var servingsMap: MutableMap<String, Int>
@@ -54,8 +66,6 @@ class NewMealServingActivity : AppCompatActivity() {
         binding = ActivityNewMealServingBinding.inflate (layoutInflater)
         setContentView(binding.root)
 
-        dragDestinationText = binding.dragDestinationText
-
         binding.nextButton.setOnClickListener {navigateToNextScreen()}
 
         setSupportActionBar(binding.toolbar)
@@ -64,39 +74,37 @@ class NewMealServingActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {onBackPressed()}
 
         servingsMap = mutableMapOf(
-            "vegetables" to 0,
-            "fruits" to 0,
-            "grains" to 0,
-            "seafood" to 0,
+            "vegetable" to 0,
+            "fruit" to 0,
+            "grain" to 0,
+            "fish" to 0,
             "poultry" to 0,
-            "meat" to 0,
-            "oils" to 0,
+            "redMeat" to 0,
+            "oil" to 0,
             "dairy" to 0,
         )
 
-        binding.dairyCard.post {
-            setFoodTilesDraggable()
-        }
         binding.indicator.createIndicators(3, 2)
 
         pieChart = binding.nutritionPieChart
 
         initializePieChart()
         setPieChartData()
+
+        setFoodGroupCardClickListeners()
     }
     private fun navigateToNextScreen() {
-        //TODO: Set proper serving values
         val newMeal = intent.getParcelableExtra<NewMeal>(Const.EXTRA_CODE_NEW_MEAL)
 
         newMeal!!.timesEaten = 1
-        newMeal.vegetableServings = 69
-        newMeal.fruitServings = 0
-        newMeal.grainServings = 0
-        newMeal.fishServings = 0
-        newMeal.poultryServings = 0
-        newMeal.redMeatServings = 0
-        newMeal.oilServings = 0
-        newMeal.dairyServings = 0
+        newMeal.vegetableServings = servingsMap["vegetable"]!!
+        newMeal.fruitServings = servingsMap["fruit"]!!
+        newMeal.grainServings = servingsMap["grain"]!!
+        newMeal.fishServings = servingsMap["fish"]!!
+        newMeal.poultryServings = servingsMap["poultry"]!!
+        newMeal.redMeatServings = servingsMap["redMeat"]!!
+        newMeal.oilServings = servingsMap["oil"]!!
+        newMeal.dairyServings = servingsMap["dairy"]!!
 
         val databaseRef = Firebase.database
         val userDataRef = databaseRef.getReference(Const.DB_USERS)
@@ -118,142 +126,53 @@ class NewMealServingActivity : AppCompatActivity() {
         pieChart.isDrawHoleEnabled = false
         pieChart.isRotationEnabled = false
         pieChart.setTouchEnabled(false)
-        pieChart.setDrawEntryLabels(false)
 
         pieChart.legend.isEnabled = false
-
-        pieChart.setUsePercentValues(true)
 
         pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
         pieChart.animateY(1400, Easing.EaseInOutQuad)
     }
 
     private fun setPieChartData() {
-        if (dragDestinationText.visibility == View.VISIBLE && totalServings != 0) {
-            dragDestinationText.visibility = View.INVISIBLE
+        val dataEntries = ArrayList<PieEntry>()
+        for ((foodGroup, servingCount) in servingsMap) {
+            if (servingCount > 0) {
+                dataEntries.add(
+                    PieEntry(
+                        servingCount.toFloat(),
+                        foodGroupDisplayNameMap[foodGroup]!!
+                    )
+                )
+            }
         }
 
-        val dataEntries = ArrayList<PieEntry>()
-        dataEntries.add(PieEntry(countToPieEntryValue(servingsMap["vegetables"]!!)))
-        dataEntries.add(PieEntry(countToPieEntryValue(servingsMap["fruits"]!!)))
-        dataEntries.add(PieEntry(countToPieEntryValue(servingsMap["grains"]!!)))
-        dataEntries.add(PieEntry(countToPieEntryValue(servingsMap["seafood"]!!)))
-        dataEntries.add(PieEntry(countToPieEntryValue(servingsMap["poultry"]!!)))
-        dataEntries.add(PieEntry(countToPieEntryValue(servingsMap["meat"]!!)))
-        dataEntries.add(PieEntry(countToPieEntryValue(servingsMap["oils"]!!)))
-        dataEntries.add(PieEntry(countToPieEntryValue(servingsMap["dairy"]!!)))
+        val dataColors = ArrayList<Int>()
+        for ((foodGroup, servingCount) in servingsMap) {
+            if (servingCount > 0) {
+                dataColors.add(colorMap[foodGroup]!!)
+            }
+        }
 
         val dataSet = PieDataSet(dataEntries, "")
-        dataSet.sliceSpace = 2f
-        dataSet.colors = pieDataColors
-        dataSet.setDrawValues(false)
+        dataSet.colors = dataColors
 
         val data = PieData(dataSet)
-        data.setValueFormatter(PercentFormatter())
+        data.setValueTextSize(12f)
+        data.setValueFormatter(IntFormatter())
 
         pieChart.data = data
 
         pieChart.invalidate()
     }
 
-    private fun countToPieEntryValue(count: Int): Float {
-        return if (totalServings == 0) 0f else ((count.toFloat() / totalServings.toFloat())) * 100f
-    }
+    private fun setFoodGroupCardClickListeners() {
+        for ((foodGroup, _) in servingsMap) {
+            var cardId = "${foodGroup}Card"
 
-    var foodCardInitialPosArr = Array(8) {FloatArray(2)}
-    var touchPos = FloatArray(2)
+            var resId: Int = resources.getIdentifier(cardId, "id", packageName)
 
-    @SuppressLint("ClickableViewAccessibility")
-    private fun setFoodTilesDraggable() {
-        var pieChartPositionArr = IntArray(2)
-        pieChart.getLocationOnScreen(pieChartPositionArr)
-        var foodCards = ArrayList<CardView>()
-        foodCards.add(binding.vegetableCard)
-        foodCards.add(binding.fruitCard)
-        foodCards.add(binding.grainCard)
-        foodCards.add(binding.fishCard)
-        foodCards.add(binding.poultryCard)
-        foodCards.add(binding.redMeatCard)
-        foodCards.add(binding.oilCard)
-        foodCards.add(binding.dairyCard)
-
-        var foodLocationArr = Array(8) {IntArray(2)}
-        for ((index, card) in foodCards.withIndex()) {
-            card.getLocationInWindow(foodLocationArr[index])
-            foodCardInitialPosArr[index][0] = foodLocationArr[index][0].toFloat() - card.height*0.14f
-            foodCardInitialPosArr[index][1] = foodLocationArr[index][1].toFloat() - card.height*0.75f
-            card.x = foodCardInitialPosArr[index][0]
-            card.y = foodCardInitialPosArr[index][1]
-            Log.d("shark", card.resources.getResourceName(card.id) + "Initial Pos [" + foodCardInitialPosArr[index][0] + ", " + foodCardInitialPosArr[index][1] + "]")
-
-            card.setOnTouchListener { view, event ->
-                view.parent.requestDisallowInterceptTouchEvent(true)
-                var newX = 0f
-                var newY = 0f
-
-                when (event.actionMasked) {
-                    MotionEvent.ACTION_DOWN -> {
-                        touchPos[0] = event.x
-                        touchPos[1] = event.y
-                        Log.d("shark", card.resources.getResourceName(card.id) + "Down Pos [" + touchPos[0] + ", " + touchPos[1] + "]")
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        newX = event.x
-                        newY = event.y
-
-                        card.x += newX - touchPos[0]
-                        card.y += newY - touchPos[1]
-                    }
-                    MotionEvent.ACTION_CANCEL -> {
-                        Log.d("shark", "CANCELED")
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        if (card.x > pieChartPositionArr[0]
-                            && card.x < pieChartPositionArr[0] + pieChart.width/2
-                            && card.y > pieChartPositionArr[1]
-                            && card.y < pieChartPositionArr[1] + pieChart.height/2) {
-                            onDragCardToChart(card)
-                        } else {
-                            card.x = foodCardInitialPosArr[index][0]
-                            card.y = foodCardInitialPosArr[index][1]
-                        }
-                        Log.d("shark", "UP")
-                    }
-                }
-                true
-            }
-        }
-    }
-
-    private fun onDragCardToChart(card: CardView) {
-        when (card.id) {
-            binding.vegetableCard.id -> {
-                addPortion("vegetables")
-            }
-            binding.fruitCard.id -> {
-                addPortion("fruits")
-            }
-            binding.grainCard.id -> {
-                addPortion("grains")
-            }
-            binding.fishCard.id -> {
-                addPortion("seafood")
-            }
-            binding.poultryCard.id -> {
-                addPortion("poultry")
-            }
-            binding.redMeatCard.id -> {
-                addPortion("meat")
-            }
-            binding.oilCard.id -> {
-                addPortion("oils")
-            }
-            binding.dairyCard.id -> {
-                addPortion("dairy")
-            }
-            else -> {
-                Toast.makeText(this, "INVALID CARD DRAGGED ONTO CHART", Toast.LENGTH_SHORT).show()
-            }
+            var foodGroupCard = findViewById<CardView>(resId)
+            foodGroupCard.setOnClickListener { addPortion(foodGroup) }
         }
     }
 
@@ -264,5 +183,11 @@ class NewMealServingActivity : AppCompatActivity() {
         totalServings++
 
         setPieChartData()
+    }
+
+    inner class IntFormatter(): ValueFormatter() {
+        override fun getFormattedValue(value: Float): String {
+            return floor(value).toInt().toString()
+        }
     }
 }

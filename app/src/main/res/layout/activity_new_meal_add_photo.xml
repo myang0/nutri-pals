@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <TextView
-            android:id="@+id/dragToFeedText"
+            android:id="@+id/clickToFeedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="256dp"
@@ -110,9 +110,9 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@color/dark_peach"
             app:cardCornerRadius="10sp"
-            app:layout_constraintEnd_toStartOf="@+id/dragToFeedText"
-            app:layout_constraintStart_toStartOf="@+id/dragToFeedText"
-            app:layout_constraintTop_toBottomOf="@+id/dragToFeedText">
+            app:layout_constraintEnd_toStartOf="@+id/clickToFeedText"
+            app:layout_constraintStart_toStartOf="@+id/clickToFeedText"
+            app:layout_constraintTop_toBottomOf="@+id/clickToFeedText">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -156,9 +156,9 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@color/dark_peach"
             app:cardCornerRadius="10sp"
-            app:layout_constraintEnd_toEndOf="@+id/dragToFeedText"
-            app:layout_constraintStart_toEndOf="@+id/dragToFeedText"
-            app:layout_constraintTop_toBottomOf="@+id/dragToFeedText">
+            app:layout_constraintEnd_toEndOf="@+id/clickToFeedText"
+            app:layout_constraintStart_toEndOf="@+id/clickToFeedText"
+            app:layout_constraintTop_toBottomOf="@+id/clickToFeedText">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
