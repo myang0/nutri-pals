@@ -30,8 +30,7 @@ class NewMealAddPhotoActivity : AppCompatActivity() {
     }
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
             val data: Intent? = result.data
             val newIntent = Intent(this, NewMealPhotoTakenActivity::class.java)
             newIntent.putExtra(Const.EXTRA_CODE_IMAGE_TAKEN, data)

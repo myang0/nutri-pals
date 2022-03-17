@@ -5,9 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class NewMeal(
-
     var name: String = Const.STRING_NO_VALUE,         // Add Meal
-    var imageName: String = Const.STRING_NO_VALUE,    // Photo Taken
+    var imageString: String = Const.STRING_NO_VALUE,    // Photo Taken
     var portionSize: String = Const.STRING_NO_VALUE,  // Add Meal
     var feeling: String = Const.STRING_NO_VALUE,      // Add Meal
     var isAddToSavedMeal: Boolean = false,              // Add Meal
