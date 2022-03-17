@@ -4,11 +4,14 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -16,12 +19,15 @@ import com.google.firebase.storage.ktx.storage
 import com.seggsmen.finalapp.databinding.ActivityNewMealPhotoTakenBinding
 import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.NewMeal
+import com.seggsmen.finalapp.util.BitmapConverter
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
 class NewMealPhotoTakenActivity : AppCompatActivity() {
     lateinit var binding: ActivityNewMealPhotoTakenBinding
-    lateinit var tempImageUri: Uri
+
+    lateinit var imageBitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -30,6 +36,7 @@ class NewMealPhotoTakenActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         loadImageFromPrevActivity()
 
         binding.toolbar.setNavigationOnClickListener {onBackPressed()}
@@ -40,23 +47,18 @@ class NewMealPhotoTakenActivity : AppCompatActivity() {
     private fun loadImageFromPrevActivity() {
         val loadedIntent = intent.getParcelableExtra<Intent?>(Const.EXTRA_CODE_IMAGE_TAKEN)
         if (loadedIntent!!.data != null) {
-            binding.photoTakenPreview.setImageURI(loadedIntent.data!!)
-            tempImageUri = loadedIntent.data!!
-
-            // No image uri aka from camera
+            imageBitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, loadedIntent.data!!)
+            binding.photoTakenPreview.setImageBitmap(imageBitmap)
         } else {
-            //TODO: Get URI from Camera because rn it just crash oof.
-            binding.photoTakenPreview.setImageBitmap(loadedIntent.extras?.get("data") as Bitmap)
-            tempImageUri = loadedIntent.data!!
+            imageBitmap = loadedIntent.extras?.get("data") as Bitmap
+            binding.photoTakenPreview.setImageBitmap(imageBitmap)
         }
     }
 
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            //TODO: Get URI from Camera because rn it just crash oof.
-            val imageData: Intent? = result.data
-            binding.photoTakenPreview.setImageBitmap(imageData?.extras?.get("data") as Bitmap)
-            tempImageUri = imageData.data!!
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            imageBitmap = result.data?.extras?.get("data") as Bitmap
+            binding.photoTakenPreview.setImageBitmap(imageBitmap)
         }
     }
 
@@ -66,33 +68,16 @@ class NewMealPhotoTakenActivity : AppCompatActivity() {
     }
 
     private fun loadNextActivity() {
+        val newIntent = Intent(this, NewMealServingActivity::class.java)
+
         val newMeal = intent.getParcelableExtra<NewMeal>(Const.EXTRA_CODE_NEW_MEAL)
-        //TODO: Upload image from binding.photoTakenPreview to Firebase
-        //      Save image key to NewMeal object
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Uploading your sick food pic...")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
 
-        //Name new file
-        val fileName = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault()).format(Date())
-        val imageRef = Firebase.storage.getReference(fileName)
+        val bitmapAsString = BitmapConverter.convertBitmapToString(imageBitmap)
+        newMeal!!.imageString = bitmapAsString
 
-        imageRef.putFile(tempImageUri).addOnSuccessListener {
-            Log.d(Const.LOG, "Uploaded new pic")
+        newIntent.putExtra(Const.EXTRA_CODE_NEW_MEAL, newMeal)
 
-            if (progressDialog.isShowing) progressDialog.dismiss()
-
-            newMeal!!.imageName = fileName
-
-            val newIntent = Intent(this, NewMealServingActivity::class.java)
-            newIntent.putExtra(Const.EXTRA_CODE_NEW_MEAL, newMeal)
-            startActivity(newIntent)
-
-        }.addOnFailureListener {
-            if (progressDialog.isShowing) progressDialog.dismiss()
-            Log.d(Const.LOG, "Failed to upload new pic")
-        }
+        startActivity(newIntent)
     }
 
     override fun onBackPressed() {
