@@ -95,7 +95,7 @@ class NewMealAddMealActivity : AppCompatActivity() {
         newMeal.name = binding.mealNameInput.text.toString()
         newMeal.portionSize = getPortionSize()
         newMeal.feeling = getFeeling()
-        newMeal.isAddToSavedMeal = binding.savedMealCheckbox.isChecked
+        newMeal.isSaved = binding.savedMealCheckbox.isChecked
 
         val intent = Intent(this, NewMealAddPhotoActivity::class.java)
         intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, newMeal)
