@@ -6,7 +6,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class SavedMeal(
     var name: String = "<no name>",
-    var image: Int = -1,
+    var isSaved: Boolean = false,
+    var imageString: String = "<no image string>",
     var vegetableServings: Int = -1,
     var fruitServings: Int = -1,
     var grainServings: Int = -1,

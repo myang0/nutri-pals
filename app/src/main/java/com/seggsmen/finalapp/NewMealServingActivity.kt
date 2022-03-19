@@ -111,7 +111,9 @@ class NewMealServingActivity : AppCompatActivity() {
 
         val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
         val userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)
-        userDataRef.child(userKey!!).child(Const.DB_SAVED_MEALS).child(newMeal.name).setValue(newMeal)
+
+        val uuid: String = UUID.randomUUID().toString()
+        userDataRef.child(userKey!!).child(Const.DB_PAST_MEALS).child("Meal_${uuid}").setValue(newMeal)
 
         val intent = Intent(this, FeedPetActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

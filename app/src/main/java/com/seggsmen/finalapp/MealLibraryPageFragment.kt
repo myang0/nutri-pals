@@ -1,6 +1,7 @@
 package com.seggsmen.finalapp
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +15,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.seggsmen.finalapp.databinding.FragmentMealLibraryBinding
+import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.SavedMeal
+import com.seggsmen.finalapp.util.BitmapConverter
 
 class MealLibraryPageFragment : Fragment() {
     lateinit var binding: FragmentMealLibraryBinding
@@ -47,7 +50,15 @@ class MealLibraryPageFragment : Fragment() {
                     textView.text = ""
                 }
                 else -> {
-                    imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, meals[currentMealIndex]!!.image))
+                    val imageString = meals[currentMealIndex]!!.imageString
+
+                    if (imageString == Const.STRING_NO_VALUE) {
+                        imageView.setImageDrawable(resources.getDrawable(R.drawable.placeholder))
+                    } else {
+                        val imageBitmap: Bitmap = BitmapConverter.convertStringToBitmap(imageString)
+                        imageView.setImageBitmap(imageBitmap)
+                    }
+
                     textView.text = meals[currentMealIndex]!!.name
                     val mealIndex = currentMealIndex
                     cardView.setOnClickListener { loadMealDetail(mealIndex) }
@@ -61,7 +72,7 @@ class MealLibraryPageFragment : Fragment() {
     private fun loadMealDetail(mealIndex: Int) {
         val intent: Intent  = Intent(activity, ViewPastMealActivity::class.java)
         intent.putExtra("name", meals[mealIndex]!!.name)
-        intent.putExtra("image_id", meals[mealIndex]!!.image)
+        intent.putExtra("image_string", meals[mealIndex]!!.imageString)
         intent.putExtra("vegetable", meals[mealIndex]!!.vegetableServings)
         intent.putExtra("fruit", meals[mealIndex]!!.fruitServings)
         intent.putExtra("grain", meals[mealIndex]!!.grainServings)

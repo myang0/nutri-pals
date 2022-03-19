@@ -1,21 +1,29 @@
 package com.seggsmen.finalapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.databinding.ActivityMealLibraryBinding
 import com.seggsmen.finalapp.logic.*
 import kotlin.math.ceil
 
-
 class MealLibraryActivity : AppCompatActivity() {
     lateinit var binding: ActivityMealLibraryBinding
     lateinit var list: RecyclerView
-    lateinit var meals: List<SavedMeal>
+
+    lateinit var meals: ArrayList<SavedMeal>
+
     var maxPageNumber = 1
     var currentPageNumber = 0
 
@@ -29,21 +37,66 @@ class MealLibraryActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.mealLibraryToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        meals = sampleFoodsList(resources)
-        maxPageNumber = ceil(((meals.size-1)/6f).toDouble()).toInt()
 
-        viewPager = binding.mealLibraryViewPager
-        viewPager.adapter = ScreenSlidePagerAdapter(this)
-        binding.indicator.setViewPager(viewPager)
+        fetchMeals()
     }
 
+    private fun fetchMeals() {
+        val dbRef = Firebase.database
+        val userDataRef = dbRef.getReference(Const.DB_USERS)
+
+        val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        val userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)
+
+        userDataRef
+            .child(userKey!!)
+            .child(Const.DB_PAST_MEALS)
+            .addListenerForSingleValueEvent(
+                object: ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val mealsFromFirebase = snapshot.value as Map<String, Map<String, Any>>
+
+                        meals = arrayListOf()
+
+                        for ((_, firebaseMeal) in mealsFromFirebase) {
+                            var meal = SavedMeal(
+                                firebaseMeal["name"] as String,
+                                firebaseMeal["saved"] as Boolean,
+                                firebaseMeal["imageString"] as String,
+                                (firebaseMeal["vegetableServings"] as Long).toInt(),
+                                (firebaseMeal["fruitServings"] as Long).toInt(),
+                                (firebaseMeal["grainServings"] as Long).toInt(),
+                                (firebaseMeal["fishServings"] as Long).toInt(),
+                                (firebaseMeal["poultryServings"] as Long).toInt(),
+                                (firebaseMeal["redMeatServings"] as Long).toInt(),
+                                (firebaseMeal["oilServings"] as Long).toInt(),
+                                (firebaseMeal["dairyServings"] as Long).toInt(),
+                                (firebaseMeal["timesEaten"] as Long).toInt()
+                            )
+
+                            meals.add(meal)
+                        }
+
+                        maxPageNumber = ceil(((meals.size-1)/6f).toDouble()).toInt()
+
+                        viewPager = binding.mealLibraryViewPager
+                        viewPager.adapter = ScreenSlidePagerAdapter(this@MealLibraryActivity)
+                        binding.indicator.setViewPager(viewPager)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                }
+            )
+    }
 
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int = maxPageNumber
 
         override fun createFragment(position: Int): MealLibraryPageFragment {
             val bundle = Bundle()
-            bundle.putParcelableArrayList("meals", ArrayList(sampleFoodsList(resources)))
+            bundle.putParcelableArrayList("meals", meals)
             bundle.putInt("pageNumber", currentPageNumber)
             currentPageNumber++
 

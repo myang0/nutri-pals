@@ -2,6 +2,7 @@ package com.seggsmen.finalapp.logic
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.seggsmen.finalapp.R
 import com.seggsmen.finalapp.ViewPastMealActivity
 import com.seggsmen.finalapp.databinding.CardSavedMealRowBinding
+import com.seggsmen.finalapp.util.BitmapConverter
 
 class SavedMealListAdapter(private val meals: List<SavedMeal>, private val context: Context, private val listener: (position: Int) -> Unit) :
     RecyclerView.Adapter<SavedMealListAdapter.ViewHolder>() {
@@ -40,12 +42,17 @@ class SavedMealListAdapter(private val meals: List<SavedMeal>, private val conte
     //Called after construction, whenever view is loaded onto screen, and whenever notified
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.mealName.text = meals[position].name
-        viewHolder.mealImage.setImageDrawable(ContextCompat.getDrawable(viewHolder.mealImage.context, meals[position].image))
-            if (selectedPos == position) {
-                viewHolder.itemView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.dark_peach)
-            } else {
-                viewHolder.itemView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.peach)
-            }
+
+        if (meals[position].imageString != null && meals[position].imageString != Const.STRING_NO_VALUE) {
+            val imageBitmap: Bitmap = BitmapConverter.convertStringToBitmap(meals[position].imageString)
+            viewHolder.mealImage.setImageBitmap(imageBitmap)
+        }
+
+        if (selectedPos == position) {
+            viewHolder.itemView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.dark_peach)
+        } else {
+            viewHolder.itemView.backgroundTintList = ContextCompat.getColorStateList(context, R.color.peach)
+        }
 
         viewHolder.itemView.setOnClickListener {
             val oldPos = selectedPos
@@ -71,6 +78,7 @@ class SavedMealListAdapter(private val meals: List<SavedMeal>, private val conte
             }
         }
     }
+
     public fun getSelectedFood(): SavedMeal? {
          return when {
             selectedPos < 0 -> {
@@ -80,5 +88,9 @@ class SavedMealListAdapter(private val meals: List<SavedMeal>, private val conte
                 meals[selectedPos]
             }
         }
+    }
+
+    public fun getSelectedPos(): Int? {
+        return if (selectedPos < 0) null else selectedPos
     }
 }
