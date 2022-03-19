@@ -9,7 +9,7 @@ data class NewMeal(
     var imageString: String = Const.STRING_NO_VALUE,    // Photo Taken
     var portionSize: String = Const.STRING_NO_VALUE,  // Add Meal
     var feeling: String = Const.STRING_NO_VALUE,      // Add Meal
-    var isAddToSavedMeal: Boolean = false,              // Add Meal
+    var isSaved: Boolean = false,              // Add Meal
     var vegetableServings: Int = -1,                    // Serving
     var fruitServings: Int = -1,                        // Serving
     var grainServings: Int = -1,                        // Serving

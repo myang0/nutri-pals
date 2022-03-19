@@ -1,6 +1,10 @@
 package com.seggsmen.finalapp.logic
 
 object Const {
+    // Maximum sizes for images
+    const val MAX_BITMAP_SIZE = 1024 * 1024 * 10
+    const val MAX_IMAGE_STRING_SIZE = 25000
+
     // Feeling buttons for new meal
     const val FEELING_SKULL = "SKULL"
     const val FEELING_CONFUSED = "CONFUSED"
@@ -28,5 +32,5 @@ object Const {
     // Firebase Database Keys
     const val DB_USERS = "Users"
     const val DB_PETNAMES = "PetName"
-    const val DB_SAVED_MEALS = "SavedMeals"
+    const val DB_PAST_MEALS = "PastMeals"
 }

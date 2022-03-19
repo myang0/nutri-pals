@@ -1,13 +1,17 @@
 package com.seggsmen.finalapp
 
 import android.content.Context
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat
 import com.seggsmen.finalapp.databinding.ActivityViewPastMealBinding
+import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.SavedMeal
 import com.seggsmen.finalapp.logic.SavedMealListAdapter
+import com.seggsmen.finalapp.util.BitmapConverter
 
 class ViewPastMealActivity : AppCompatActivity() {
     lateinit var binding: ActivityViewPastMealBinding
@@ -26,8 +30,16 @@ class ViewPastMealActivity : AppCompatActivity() {
 
     private fun loadIntentData() {
         binding.viewPastMealName.text = intent.getStringExtra("name")
-        binding.viewPastMealImage.setImageDrawable(ContextCompat.getDrawable(
-            this, intent.getIntExtra("image_id", R.drawable.fried_rice)))
+
+        val imageString = intent.getStringExtra("image_string")
+
+        if (imageString == Const.STRING_NO_VALUE || imageString == null) {
+            binding.viewPastMealImage.setImageDrawable(resources.getDrawable(R.drawable.placeholder, applicationContext.theme))
+        } else {
+            val imageBitmap: Bitmap = BitmapConverter.convertStringToBitmap(imageString)
+            binding.viewPastMealImage.setImageBitmap(imageBitmap)
+        }
+
         binding.viewPastMealVegCount.text = intent.getIntExtra("vegetable", -1).toString()
         binding.viewPastMealFruitCount.text = intent.getIntExtra("fruit", -1).toString()
         binding.viewPastMealGrainCount.text = intent.getIntExtra("grain", -1).toString()

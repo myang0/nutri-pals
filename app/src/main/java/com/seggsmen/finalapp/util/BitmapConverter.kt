@@ -4,15 +4,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.Base64
+import android.util.Log
 import java.io.ByteArrayOutputStream
 
 
 class BitmapConverter {
     companion object {
-        fun convertBitmapToString(b: Bitmap): String {
+        fun convertBitmapToString(b: Bitmap, quality: Int): String {
             val base = ByteArrayOutputStream()
 
-            b.compress(Bitmap.CompressFormat.WEBP, 50, base)
+            b.compress(Bitmap.CompressFormat.WEBP, quality, base)
 
             val bytes = base.toByteArray()
 
