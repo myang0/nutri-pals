@@ -58,32 +58,34 @@ class SavedMealsActivity : AppCompatActivity() {
             .addListenerForSingleValueEvent(
                 object: ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        val mealsFromFirebase = snapshot.value as Map<String, Map<String, Any>>
-
-                        mealIdList = arrayListOf()
                         var savedMeals: ArrayList<SavedMeal> = arrayListOf()
+                        if (snapshot.value != null) {
+                            val mealsFromFirebase = snapshot.value as Map<String, Map<String, Any>>
 
-                        for ((mealId, firebaseMeal) in mealsFromFirebase) {
-                            val isSaved = firebaseMeal["saved"] as Boolean
-                            if (isSaved) {
-                                mealIdList.add(mealId)
+                            mealIdList = arrayListOf()
 
-                                var meal = SavedMeal(
-                                    firebaseMeal["name"] as String,
-                                    firebaseMeal["saved"] as Boolean,
-                                    firebaseMeal["imageString"] as String,
-                                    (firebaseMeal["vegetableServings"] as Long).toInt(),
-                                    (firebaseMeal["fruitServings"] as Long).toInt(),
-                                    (firebaseMeal["grainServings"] as Long).toInt(),
-                                    (firebaseMeal["fishServings"] as Long).toInt(),
-                                    (firebaseMeal["poultryServings"] as Long).toInt(),
-                                    (firebaseMeal["redMeatServings"] as Long).toInt(),
-                                    (firebaseMeal["oilServings"] as Long).toInt(),
-                                    (firebaseMeal["dairyServings"] as Long).toInt(),
-                                    (firebaseMeal["timesEaten"] as Long).toInt(),
-                                )
+                            for ((mealId, firebaseMeal) in mealsFromFirebase) {
+                                val isSaved = firebaseMeal["saved"] as Boolean
+                                if (isSaved) {
+                                    mealIdList.add(mealId)
 
-                                savedMeals.add(meal)
+                                    var meal = SavedMeal(
+                                        firebaseMeal["name"] as String,
+                                        firebaseMeal["saved"] as Boolean,
+                                        firebaseMeal["imageString"] as String,
+                                        (firebaseMeal["vegetableServings"] as Long).toInt(),
+                                        (firebaseMeal["fruitServings"] as Long).toInt(),
+                                        (firebaseMeal["grainServings"] as Long).toInt(),
+                                        (firebaseMeal["fishServings"] as Long).toInt(),
+                                        (firebaseMeal["poultryServings"] as Long).toInt(),
+                                        (firebaseMeal["redMeatServings"] as Long).toInt(),
+                                        (firebaseMeal["oilServings"] as Long).toInt(),
+                                        (firebaseMeal["dairyServings"] as Long).toInt(),
+                                        (firebaseMeal["timesEaten"] as Long).toInt(),
+                                    )
+
+                                    savedMeals.add(meal)
+                                }
                             }
                         }
 
