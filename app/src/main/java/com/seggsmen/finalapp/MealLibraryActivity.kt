@@ -22,7 +22,8 @@ class MealLibraryActivity : AppCompatActivity() {
     lateinit var binding: ActivityMealLibraryBinding
     lateinit var list: RecyclerView
 
-    lateinit var meals: ArrayList<SavedMeal>
+    var meals = arrayListOf<SavedMeal>()
+//    lateinit var meals: ArrayList<SavedMeal>
 
     var maxPageNumber = 1
     var currentPageNumber = 0
@@ -54,34 +55,40 @@ class MealLibraryActivity : AppCompatActivity() {
             .addListenerForSingleValueEvent(
                 object: ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        val mealsFromFirebase = snapshot.value as Map<String, Map<String, Any>>
+                        maxPageNumber = 1
+                        if (snapshot.value != null) {
+                            Log.d(Const.LOG, "Saved Meal data is present")
+                            val mealsFromFirebase = snapshot.value as Map<String, Map<String, Any>>
 
-                        meals = arrayListOf()
+//                            meals = arrayListOf()
 
-                        for ((_, firebaseMeal) in mealsFromFirebase) {
-                            var meal = SavedMeal(
-                                firebaseMeal["name"] as String,
-                                firebaseMeal["saved"] as Boolean,
-                                firebaseMeal["imageString"] as String,
-                                (firebaseMeal["vegetableServings"] as Long).toInt(),
-                                (firebaseMeal["fruitServings"] as Long).toInt(),
-                                (firebaseMeal["grainServings"] as Long).toInt(),
-                                (firebaseMeal["fishServings"] as Long).toInt(),
-                                (firebaseMeal["poultryServings"] as Long).toInt(),
-                                (firebaseMeal["redMeatServings"] as Long).toInt(),
-                                (firebaseMeal["oilServings"] as Long).toInt(),
-                                (firebaseMeal["dairyServings"] as Long).toInt(),
-                                (firebaseMeal["timesEaten"] as Long).toInt()
-                            )
+                            for ((_, firebaseMeal) in mealsFromFirebase) {
+                                var meal = SavedMeal(
+                                    firebaseMeal["name"] as String,
+                                    firebaseMeal["saved"] as Boolean,
+                                    firebaseMeal["imageString"] as String,
+                                    (firebaseMeal["vegetableServings"] as Long).toInt(),
+                                    (firebaseMeal["fruitServings"] as Long).toInt(),
+                                    (firebaseMeal["grainServings"] as Long).toInt(),
+                                    (firebaseMeal["fishServings"] as Long).toInt(),
+                                    (firebaseMeal["poultryServings"] as Long).toInt(),
+                                    (firebaseMeal["redMeatServings"] as Long).toInt(),
+                                    (firebaseMeal["oilServings"] as Long).toInt(),
+                                    (firebaseMeal["dairyServings"] as Long).toInt(),
+                                    (firebaseMeal["timesEaten"] as Long).toInt()
+                                )
 
-                            meals.add(meal)
+                                meals.add(meal)
+                            }
+
+                            maxPageNumber = ceil(((meals.size-1)/6f).toDouble()).toInt()
+                            if (maxPageNumber < 1) maxPageNumber = 1
+
                         }
-
-                        maxPageNumber = ceil(((meals.size-1)/6f).toDouble()).toInt()
-
                         viewPager = binding.mealLibraryViewPager
                         viewPager.adapter = ScreenSlidePagerAdapter(this@MealLibraryActivity)
                         binding.indicator.setViewPager(viewPager)
+                        Log.d(Const.LOG, "HELLO?")
                     }
 
                     override fun onCancelled(error: DatabaseError) {
