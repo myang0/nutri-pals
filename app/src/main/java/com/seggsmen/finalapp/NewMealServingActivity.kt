@@ -5,10 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.github.mikephil.charting.animation.Easing
@@ -16,10 +12,7 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.seggsmen.finalapp.databinding.ActivityNewMealServingBinding
-import android.view.View.OnTouchListener
-import android.widget.TextView
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,7 +22,9 @@ import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.NewMeal
 import com.seggsmen.finalapp.logic.PetStats
-import java.text.DecimalFormat
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.floor
@@ -128,8 +123,8 @@ class NewMealServingActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dbPetStats = snapshot.value as HashMap<*, *>
                 petStats.feeling = dbPetStats [Const.DB_FEELING] as String
-                petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as Long
-                petStats.timeLastVisited = dbPetStats [Const.DB_LAST_VISITED] as Long
+                petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as String
+                petStats.timeLastDecay = dbPetStats [Const.DB_LAST_DECAY] as String
                 petStats.vegetableServings = dbPetStats [Const.DB_VEGETABLE] as Long
                 petStats.fruitServings = dbPetStats [Const.DB_FRUIT] as Long
                 petStats.grainServings = dbPetStats [Const.DB_GRAIN] as Long
@@ -139,7 +134,9 @@ class NewMealServingActivity : AppCompatActivity() {
                 petStats.oilServings = dbPetStats [Const.DB_OIL] as Long
                 petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Long
 
-                petStats.timeLastEaten = System.currentTimeMillis()
+                petStats.timeLastEaten = Instant.ofEpochMilli(System.currentTimeMillis())
+                                            .atZone(ZoneId.systemDefault())
+                                            .toLocalDateTime().toString()
                 petStats.vegetableServings += newMeal.vegetableServings
                 petStats.fruitServings += newMeal.fruitServings
                 petStats.grainServings += newMeal.grainServings

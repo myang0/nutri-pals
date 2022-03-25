@@ -18,6 +18,8 @@ import com.seggsmen.finalapp.fragments.PetNameListener
 import com.seggsmen.finalapp.fragments.ThirdOnboardingPageFragment
 import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.PetStats
+import java.time.Instant
+import java.time.ZoneId
 
 interface OnboardingListener {
     fun onNextButtonPressed()
@@ -125,16 +127,20 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         val petStatRef = userKey.child(Const.DB_PET_STATS)
         val petStats = PetStats()
         petStats.feeling = Const.FEELING_NEUTRAL
-        petStats.timeLastEaten = System.currentTimeMillis()
-        petStats.timeLastVisited = System.currentTimeMillis()
-        petStats.vegetableServings = 0
-        petStats.fruitServings = 0
-        petStats.grainServings = 0
-        petStats.redMeatServings = 0
-        petStats.poultryServings = 0
-        petStats.fishServings = 0
-        petStats.oilServings = 0
-        petStats.dairyServings = 0
+        petStats.timeLastEaten = Instant.ofEpochMilli(System.currentTimeMillis())
+                                    .atZone(ZoneId.systemDefault())
+                                    .toLocalDateTime().toString()
+        petStats.timeLastDecay = Instant.ofEpochMilli(System.currentTimeMillis())
+                                    .atZone(ZoneId.systemDefault())
+                                    .toLocalDateTime().toString()
+        petStats.vegetableServings = 100
+        petStats.fruitServings = 100
+        petStats.grainServings = 100
+        petStats.redMeatServings = 100
+        petStats.poultryServings = 100
+        petStats.fishServings = 100
+        petStats.oilServings = 100
+        petStats.dairyServings = 100
         petStatRef.setValue(petStats)
 
         startActivity(intent)

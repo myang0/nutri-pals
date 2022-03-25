@@ -2,12 +2,15 @@ package com.seggsmen.finalapp.logic
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 @Parcelize
 data class PetStats(
     var feeling: String = Const.STRING_NO_VALUE,
-    var timeLastEaten: Long = -1,
-    var timeLastVisited: Long = -1,
+    var timeLastEaten: String = Const.STRING_NO_VALUE,
+    var timeLastDecay: String = Const.STRING_NO_VALUE,
     var vegetableServings: Long = -1,
     var fruitServings: Long = -1,
     var grainServings: Long = -1,

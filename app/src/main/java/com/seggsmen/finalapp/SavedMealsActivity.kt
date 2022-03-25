@@ -1,14 +1,10 @@
 package com.seggsmen.finalapp
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -16,8 +12,10 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.databinding.ActivitySavedMealsBinding
 import com.seggsmen.finalapp.logic.*
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.HashMap
-import kotlin.math.ceil
 
 class SavedMealsActivity : AppCompatActivity() {
     lateinit var binding: ActivitySavedMealsBinding
@@ -151,8 +149,8 @@ class SavedMealsActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val dbPetStats = snapshot.value as HashMap<*, *>
                     petStats.feeling = dbPetStats[Const.DB_FEELING] as String
-                    petStats.timeLastEaten = dbPetStats[Const.DB_LAST_EATEN] as Long
-                    petStats.timeLastVisited = dbPetStats[Const.DB_LAST_VISITED] as Long
+                    petStats.timeLastEaten = dbPetStats[Const.DB_LAST_EATEN] as String
+                    petStats.timeLastDecay = dbPetStats[Const.DB_LAST_DECAY] as String
                     petStats.vegetableServings = dbPetStats[Const.DB_VEGETABLE] as Long
                     petStats.fruitServings = dbPetStats[Const.DB_FRUIT] as Long
                     petStats.grainServings = dbPetStats[Const.DB_GRAIN] as Long
@@ -162,7 +160,9 @@ class SavedMealsActivity : AppCompatActivity() {
                     petStats.oilServings = dbPetStats[Const.DB_OIL] as Long
                     petStats.dairyServings = dbPetStats[Const.DB_DAIRY] as Long
 
-                    petStats.timeLastEaten = System.currentTimeMillis()
+                    petStats.timeLastEaten = Instant.ofEpochMilli(System.currentTimeMillis())
+                                                .atZone(ZoneId.systemDefault())
+                                                .toLocalDateTime().toString()
                     petStats.vegetableServings += selectedMeal!!.vegetableServings
                     petStats.fruitServings += selectedMeal.fruitServings
                     petStats.grainServings += selectedMeal.grainServings

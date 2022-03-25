@@ -2,29 +2,36 @@ package com.seggsmen.finalapp
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.databinding.ActivityMainBinding
 import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.PetStats
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     var petStats = PetStats()
     val animationDuration = (200).toLong()
+    lateinit var userKey: String
+    lateinit var petStatsRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         loadPetStats()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -44,40 +51,158 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadPetStats() {
         val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-        val userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
+        userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
 
-        val petStatsRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_PET_STATS)
+        petStatsRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_PET_STATS)
         petStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dbPetStats = snapshot.value as HashMap<*, *>
-                binding.feelingStatusText.text = dbPetStats [Const.DB_FEELING] as String
-                petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as Long
-                petStats.timeLastVisited = dbPetStats [Const.DB_LAST_VISITED] as Long
-                binding.vegetableServingText.text = "${(dbPetStats [Const.DB_VEGETABLE] as Long)} / 3"
-                binding.fruitServingText.text = "${(dbPetStats [Const.DB_FRUIT] as Long)} / 3"
-                binding.grainServingText.text = "${(dbPetStats [Const.DB_GRAIN] as Long)} / 3"
-                binding.fishServingText.text = "${(dbPetStats [Const.DB_FISH] as Long)} / 3"
-                binding.poultryServingText.text = "${(dbPetStats [Const.DB_POULTRY] as Long)} / 3"
-                binding.redMeatServingText.text = "${(dbPetStats [Const.DB_REDMEAT] as Long)} / 3"
-                binding.oilServingText.text = "${(dbPetStats [Const.DB_OIL] as Long)} / 3"
-                binding.dairyServingText.text = "${(dbPetStats [Const.DB_DAIRY] as Long)} / 3"
+                petStats.feeling = dbPetStats [Const.DB_FEELING] as String
+                petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as String
+                petStats.timeLastDecay = dbPetStats [Const.DB_LAST_DECAY] as String
+                petStats.vegetableServings = dbPetStats [Const.DB_VEGETABLE] as Long
+                petStats.fruitServings = dbPetStats [Const.DB_FRUIT] as Long
+                petStats.grainServings = dbPetStats [Const.DB_GRAIN] as Long
+                petStats.fishServings = dbPetStats [Const.DB_FISH] as Long
+                petStats.poultryServings = dbPetStats [Const.DB_POULTRY] as Long
+                petStats.redMeatServings = dbPetStats [Const.DB_REDMEAT] as Long
+                petStats.oilServings = dbPetStats [Const.DB_OIL] as Long
+                petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Long
 
-//                petStats.feeling = dbPetStats [Const.DB_FEELING] as String
-//                petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as Long
-//                petStats.timeLastVisited = dbPetStats [Const.DB_LAST_VISITED] as Long
-//                petStats.vegetableServings = dbPetStats [Const.DB_VEGETABLE] as Int
-//                petStats.fruitServings = dbPetStats [Const.DB_FRUIT] as Int
-//                petStats.grainServings = dbPetStats [Const.DB_GRAIN] as Int
-//                petStats.fishServings = dbPetStats [Const.DB_FISH] as Int
-//                petStats.poultryServings = dbPetStats [Const.DB_POULTRY] as Int
-//                petStats.redMeatServings = dbPetStats [Const.DB_REDMEAT] as Int
-//                petStats.oilServings = dbPetStats [Const.DB_OIL] as Int
-//                petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Int
+                checkFoodServingDecay()
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
         })
+    }
+
+    private fun checkFoodServingDecay() {
+        var lastDecayTime = LocalDateTime.parse(petStats.timeLastDecay)
+
+        val currentTime = Instant.ofEpochMilli(System.currentTimeMillis())
+            .atZone(ZoneId.systemDefault())
+            .toLocalDateTime()
+
+        val timeElapsed: Long = ChronoUnit.MINUTES.between(lastDecayTime, currentTime)
+//        val timeElapsed: Long = ChronoUnit.SECONDS.between(lastDecayTime, currentTime)
+        Log.d(Const.LOG, "Last Decay Time: ${lastDecayTime}")
+        Log.d(Const.LOG, "Current Time: ${currentTime}")
+        Log.d(Const.LOG, "Minutes: ${timeElapsed}")
+//        Log.d(Const.LOG, "Seconds: ${timeElapsed}")
+
+        val instances = timeElapsed/(60*12) // Half days
+//        val instances = timeElapsed/30 // Half minutes
+        Log.d(Const.LOG, "Instances: ${instances}")
+
+        if (instances > 0) {
+            lastDecayTime = lastDecayTime.plusHours(instances*12)
+//            lastDecayTime = lastDecayTime.plusSeconds(instances*30)
+            petStats.timeLastDecay = lastDecayTime.toString()
+        }
+        for (i in 1..instances) {
+            val totalServings = petStats.vegetableServings + petStats.fruitServings +
+                    petStats.grainServings + petStats.fishServings + petStats.poultryServings +
+                    petStats.redMeatServings + petStats.oilServings + petStats.dairyServings
+            Log.d(Const.LOG, "Total Servings: ${totalServings}")
+            if (totalServings > 0) {
+                foodServingDecay()
+            } else {
+                Log.d(Const.LOG, "NO SERVINGS, STARVING!")
+                //Todo idk make bjingus sad or something
+                break
+            }
+        }
+
+        binding.vegetableServingText.text = "${petStats.vegetableServings} / 3"
+        binding.fruitServingText.text = "${petStats.fruitServings} / 3"
+        binding.grainServingText.text = "${petStats.grainServings} / 3"
+        binding.fishServingText.text = "${petStats.fishServings} / 3"
+        binding.poultryServingText.text = "${petStats.poultryServings} / 3"
+        binding.redMeatServingText.text = "${petStats.redMeatServings} / 3"
+        binding.oilServingText.text = "${petStats.oilServings} / 3"
+        binding.dairyServingText.text = "${petStats.dairyServings} / 3"
+        Log.d(Const.LOG, "New Decay: ${lastDecayTime}}")
+        petStatsRef.setValue(petStats)
+    }
+
+    private fun foodServingDecay() {
+        val randomServing = listOf(Const.DB_VEGETABLE, Const.DB_FRUIT, Const.DB_GRAIN, Const.DB_FISH,
+            Const.DB_POULTRY, Const.DB_REDMEAT, Const.DB_OIL, Const.DB_DAIRY).random()
+        when (randomServing) {
+            Const.DB_VEGETABLE -> {
+                if (petStats.vegetableServings > 0) {
+                    petStats.vegetableServings--
+                    Log.d(Const.LOG, "VEGGIES--")
+                } else {
+                    foodServingDecay()
+                    Log.d(Const.LOG, "VEGGIES REROLLED")
+                }
+            }
+            Const.DB_FRUIT -> {
+                if (petStats.fruitServings > 0) {
+                    petStats.fruitServings--
+                    Log.d(Const.LOG, "FRUITS--")
+                } else {
+                    foodServingDecay()
+                    Log.d(Const.LOG, "FRUITS REROLLED")
+                }
+            }
+            Const.DB_GRAIN -> {
+                if (petStats.grainServings > 0) {
+                    petStats.grainServings--
+                    Log.d(Const.LOG, "GRAINS--")
+                } else {
+                    foodServingDecay()
+                    Log.d(Const.LOG, "GRAINS REROLLED")
+                }
+            }
+            Const.DB_FISH -> {
+                if (petStats.fishServings > 0) {
+                    petStats.fishServings--
+                    Log.d(Const.LOG, "FISH--")
+                } else {
+                    foodServingDecay()
+                    Log.d(Const.LOG, "FISH REROLLED")
+                }
+            }
+            Const.DB_POULTRY -> {
+                if (petStats.poultryServings > 0) {
+                    petStats.poultryServings--
+                    Log.d(Const.LOG, "POULTRY--")
+                } else {
+                    foodServingDecay()
+                    Log.d(Const.LOG, "POULTRY REROLLED")
+                }
+            }
+            Const.DB_REDMEAT -> {
+                if (petStats.redMeatServings > 0) {
+                    petStats.redMeatServings--
+                    Log.d(Const.LOG, "RED MEAT--")
+                } else {
+                    foodServingDecay()
+                    Log.d(Const.LOG, "RED MEAT REROLLED")
+                }
+            }
+            Const.DB_OIL -> {
+                if (petStats.oilServings > 0) {
+                    petStats.oilServings--
+                    Log.d(Const.LOG, "OIL--")
+                } else {
+                    foodServingDecay()
+                    Log.d(Const.LOG, "OIL REROLLED")
+                }
+            }
+            Const.DB_DAIRY -> {
+                if (petStats.dairyServings > 0) {
+                    petStats.dairyServings--
+                    Log.d(Const.LOG, "DAIRY--")
+                } else {
+                    foodServingDecay()
+                    Log.d(Const.LOG, "DAIRY REROLLED")
+                }
+            }
+        }
     }
 
     private fun enablePetting() {
