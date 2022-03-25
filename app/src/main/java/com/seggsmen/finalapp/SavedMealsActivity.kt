@@ -15,10 +15,8 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.databinding.ActivitySavedMealsBinding
-import com.seggsmen.finalapp.logic.Const
-import com.seggsmen.finalapp.logic.SavedMeal
-import com.seggsmen.finalapp.logic.SavedMealListAdapter
-import com.seggsmen.finalapp.logic.sampleFoodsList
+import com.seggsmen.finalapp.logic.*
+import java.util.HashMap
 import kotlin.math.ceil
 
 class SavedMealsActivity : AppCompatActivity() {
@@ -70,18 +68,18 @@ class SavedMealsActivity : AppCompatActivity() {
                                     mealIdList.add(mealId)
 
                                     var meal = SavedMeal(
-                                        firebaseMeal["name"] as String,
-                                        firebaseMeal["saved"] as Boolean,
-                                        firebaseMeal["imageString"] as String,
-                                        (firebaseMeal["vegetableServings"] as Long).toInt(),
-                                        (firebaseMeal["fruitServings"] as Long).toInt(),
-                                        (firebaseMeal["grainServings"] as Long).toInt(),
-                                        (firebaseMeal["fishServings"] as Long).toInt(),
-                                        (firebaseMeal["poultryServings"] as Long).toInt(),
-                                        (firebaseMeal["redMeatServings"] as Long).toInt(),
-                                        (firebaseMeal["oilServings"] as Long).toInt(),
-                                        (firebaseMeal["dairyServings"] as Long).toInt(),
-                                        (firebaseMeal["timesEaten"] as Long).toInt(),
+                                        firebaseMeal[Const.DB_NAME] as String,
+                                        firebaseMeal[Const.DB_SAVED] as Boolean,
+                                        firebaseMeal[Const.DB_IMAGE_STRING] as String,
+                                        (firebaseMeal[Const.DB_VEGETABLE] as Long).toInt(),
+                                        (firebaseMeal[Const.DB_FRUIT] as Long).toInt(),
+                                        (firebaseMeal[Const.DB_GRAIN] as Long).toInt(),
+                                        (firebaseMeal[Const.DB_FISH] as Long).toInt(),
+                                        (firebaseMeal[Const.DB_POULTRY] as Long).toInt(),
+                                        (firebaseMeal[Const.DB_REDMEAT] as Long).toInt(),
+                                        (firebaseMeal[Const.DB_OIL] as Long).toInt(),
+                                        (firebaseMeal[Const.DB_DAIRY] as Long).toInt(),
+                                        (firebaseMeal[Const.DB_TIMES_EATEN] as Long).toInt(),
                                     )
 
                                     savedMeals.add(meal)
@@ -145,11 +143,47 @@ class SavedMealsActivity : AppCompatActivity() {
 
             userDataRef.child(userKey!!).child(Const.DB_PAST_MEALS).child(currentId).setValue(selectedMeal)
 
-            val intent = Intent(this, FeedPetActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, selectedMeal)
-            startActivity(intent)
-            finish()
+            // Update pet stats
+            val petStatsRef = userDataRef.child(userKey).child(Const.DB_PET_STATS)
+            val petStats = PetStats()
+
+            petStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val dbPetStats = snapshot.value as HashMap<*, *>
+                    petStats.feeling = dbPetStats[Const.DB_FEELING] as String
+                    petStats.timeLastEaten = dbPetStats[Const.DB_LAST_EATEN] as Long
+                    petStats.timeLastVisited = dbPetStats[Const.DB_LAST_VISITED] as Long
+                    petStats.vegetableServings = dbPetStats[Const.DB_VEGETABLE] as Long
+                    petStats.fruitServings = dbPetStats[Const.DB_FRUIT] as Long
+                    petStats.grainServings = dbPetStats[Const.DB_GRAIN] as Long
+                    petStats.fishServings = dbPetStats[Const.DB_FISH] as Long
+                    petStats.poultryServings = dbPetStats[Const.DB_POULTRY] as Long
+                    petStats.redMeatServings = dbPetStats[Const.DB_REDMEAT] as Long
+                    petStats.oilServings = dbPetStats[Const.DB_OIL] as Long
+                    petStats.dairyServings = dbPetStats[Const.DB_DAIRY] as Long
+
+                    petStats.timeLastEaten = System.currentTimeMillis()
+                    petStats.vegetableServings += selectedMeal!!.vegetableServings
+                    petStats.fruitServings += selectedMeal.fruitServings
+                    petStats.grainServings += selectedMeal.grainServings
+                    petStats.fishServings += selectedMeal.fishServings
+                    petStats.poultryServings += selectedMeal.poultryServings
+                    petStats.redMeatServings += selectedMeal.redMeatServings
+                    petStats.oilServings += selectedMeal.oilServings
+                    petStats.dairyServings += selectedMeal.dairyServings
+
+                    petStatsRef.setValue(petStats)
+
+                    val intent = Intent(this@SavedMealsActivity, FeedPetActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, selectedMeal)
+                    startActivity(intent)
+                    finish()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
         }
     }
 

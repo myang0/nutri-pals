@@ -17,6 +17,7 @@ import com.seggsmen.finalapp.fragments.FourthOnboardingPageFragment
 import com.seggsmen.finalapp.fragments.PetNameListener
 import com.seggsmen.finalapp.fragments.ThirdOnboardingPageFragment
 import com.seggsmen.finalapp.logic.Const
+import com.seggsmen.finalapp.logic.PetStats
 
 interface OnboardingListener {
     fun onNextButtonPressed()
@@ -119,6 +120,22 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
             putString(Const.USER_KEY, userKey.key)
             apply()
         }
+
+        // Initialize pet stats
+        val petStatRef = userKey.child(Const.DB_PET_STATS)
+        val petStats = PetStats()
+        petStats.feeling = Const.FEELING_NEUTRAL
+        petStats.timeLastEaten = System.currentTimeMillis()
+        petStats.timeLastVisited = System.currentTimeMillis()
+        petStats.vegetableServings = 0
+        petStats.fruitServings = 0
+        petStats.grainServings = 0
+        petStats.redMeatServings = 0
+        petStats.poultryServings = 0
+        petStats.fishServings = 0
+        petStats.oilServings = 0
+        petStats.dairyServings = 0
+        petStatRef.setValue(petStats)
 
         startActivity(intent)
     }

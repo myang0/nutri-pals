@@ -21,10 +21,14 @@ import com.seggsmen.finalapp.databinding.ActivityNewMealServingBinding
 import android.view.View.OnTouchListener
 import android.widget.TextView
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.logic.Const
 import com.seggsmen.finalapp.logic.NewMeal
+import com.seggsmen.finalapp.logic.PetStats
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -115,11 +119,48 @@ class NewMealServingActivity : AppCompatActivity() {
         val uuid: String = UUID.randomUUID().toString()
         userDataRef.child(userKey!!).child(Const.DB_PAST_MEALS).child("Meal_${uuid}").setValue(newMeal)
 
-        val intent = Intent(this, FeedPetActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, newMeal)
-        startActivity(intent)
-        finish()
+
+        // Update pet stats
+        val petStatsRef = userDataRef.child(userKey).child(Const.DB_PET_STATS)
+        val petStats = PetStats()
+
+        petStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val dbPetStats = snapshot.value as HashMap<*, *>
+                petStats.feeling = dbPetStats [Const.DB_FEELING] as String
+                petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as Long
+                petStats.timeLastVisited = dbPetStats [Const.DB_LAST_VISITED] as Long
+                petStats.vegetableServings = dbPetStats [Const.DB_VEGETABLE] as Long
+                petStats.fruitServings = dbPetStats [Const.DB_FRUIT] as Long
+                petStats.grainServings = dbPetStats [Const.DB_GRAIN] as Long
+                petStats.fishServings = dbPetStats [Const.DB_FISH] as Long
+                petStats.poultryServings = dbPetStats [Const.DB_POULTRY] as Long
+                petStats.redMeatServings = dbPetStats [Const.DB_REDMEAT] as Long
+                petStats.oilServings = dbPetStats [Const.DB_OIL] as Long
+                petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Long
+
+                petStats.timeLastEaten = System.currentTimeMillis()
+                petStats.vegetableServings += newMeal.vegetableServings
+                petStats.fruitServings += newMeal.fruitServings
+                petStats.grainServings += newMeal.grainServings
+                petStats.fishServings += newMeal.fishServings
+                petStats.poultryServings += newMeal.poultryServings
+                petStats.redMeatServings += newMeal.redMeatServings
+                petStats.oilServings += newMeal.oilServings
+                petStats.dairyServings += newMeal.dairyServings
+
+                petStatsRef.setValue(petStats)
+
+                val intent = Intent(this@NewMealServingActivity, FeedPetActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, newMeal)
+                startActivity(intent)
+                finish()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 
     private fun initializePieChart() {

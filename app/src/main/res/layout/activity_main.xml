@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:gravity="center_vertical"
             android:fontFamily="@font/dm_sans"
+            android:gravity="center_vertical"
             android:text="Bjïngus"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -54,8 +54,8 @@
             android:layout_height="55dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="#943131"
             android:background="@drawable/rounded_corners"
+            android:backgroundTint="#943131"
             android:src="@drawable/past_meals_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -167,6 +167,7 @@
                         android:minHeight="5dp" />
 
                     <TextView
+                        android:id="@+id/vegetable_serving_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0 / 3"
@@ -212,6 +213,7 @@
                         android:minHeight="5dp" />
 
                     <TextView
+                        android:id="@+id/fruit_serving_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0 / 3"
@@ -257,6 +259,7 @@
                         android:minHeight="5dp" />
 
                     <TextView
+                        android:id="@+id/grain_serving_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0 / 3"
@@ -302,6 +305,7 @@
                         android:minHeight="5dp" />
 
                     <TextView
+                        android:id="@+id/fish_serving_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0 / 3"
@@ -347,6 +351,7 @@
                         android:minHeight="5dp" />
 
                     <TextView
+                        android:id="@+id/poultry_serving_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0 / 3"
@@ -392,6 +397,7 @@
                         android:minHeight="5dp" />
 
                     <TextView
+                        android:id="@+id/red_meat_serving_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0 / 3"
@@ -437,6 +443,7 @@
                         android:minHeight="5dp" />
 
                     <TextView
+                        android:id="@+id/oil_serving_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0 / 3"
@@ -482,6 +489,7 @@
                         android:minHeight="5dp" />
 
                     <TextView
+                        android:id="@+id/dairy_serving_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0 / 3"
@@ -514,22 +522,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="48dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
             android:fontFamily="@font/dm_sans"
             android:text="Status:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/statusValueText"
+            android:id="@+id/feeling_status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textSize="20sp"
-            android:textColor="@color/black"
             android:text="Happy"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/statusText"
             app:layout_constraintStart_toEndOf="@+id/statusText"
             app:layout_constraintTop_toTopOf="@+id/statusText" />

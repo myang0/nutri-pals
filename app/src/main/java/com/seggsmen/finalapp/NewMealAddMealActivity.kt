@@ -24,11 +24,11 @@ class NewMealAddMealActivity : AppCompatActivity() {
         binding.smallPortionCard.setOnClickListener {onPortionClick(Const.PORTION_SMALL)}
         binding.mediumPortionCard.setOnClickListener {onPortionClick(Const.PORTION_MEDIUM)}
         binding.largePortionCard.setOnClickListener {onPortionClick(Const.PORTION_LARGE)}
-        binding.skullFeelingButton.setOnClickListener {onFeelingClick(Const.FEELING_SKULL)}
-        binding.confusedFeelingButton.setOnClickListener {onFeelingClick(Const.FEELING_CONFUSED)}
-        binding.neutralFeelingButton.setOnClickListener {onFeelingClick(Const.FEELING_NEUTRAL)}
-        binding.happyFeelingButton.setOnClickListener {onFeelingClick(Const.FEELING_HAPPY)}
-        binding.smilingFeelingButton.setOnClickListener {onFeelingClick(Const.FEELING_SMILING)}
+        binding.skullFeelingButton.setOnClickListener {onFeelingClick(Const.MEAL_SKULL)}
+        binding.confusedFeelingButton.setOnClickListener {onFeelingClick(Const.MEAL_CONFUSED)}
+        binding.neutralFeelingButton.setOnClickListener {onFeelingClick(Const.MEAL_NEUTRAL)}
+        binding.happyFeelingButton.setOnClickListener {onFeelingClick(Const.MEAL_HAPPY)}
+        binding.smilingFeelingButton.setOnClickListener {onFeelingClick(Const.MEAL_SMILING)}
         binding.toolbar.setNavigationOnClickListener {onBackPressed()}
         binding.indicator.createIndicators(3, 0)
     }
@@ -69,11 +69,11 @@ class NewMealAddMealActivity : AppCompatActivity() {
         binding.happyFeelingButton.alpha = 0.5f
         binding.smilingFeelingButton.alpha = 0.5f
         when (feeling) {
-            Const.FEELING_SKULL -> binding.skullFeelingButton.alpha = 1f
-            Const.FEELING_CONFUSED -> binding.confusedFeelingButton.alpha = 1f
-            Const.FEELING_NEUTRAL -> binding.neutralFeelingButton.alpha = 1f
-            Const.FEELING_HAPPY -> binding.happyFeelingButton.alpha = 1f
-            Const.FEELING_SMILING -> binding.smilingFeelingButton.alpha = 1f
+            Const.MEAL_SKULL -> binding.skullFeelingButton.alpha = 1f
+            Const.MEAL_CONFUSED -> binding.confusedFeelingButton.alpha = 1f
+            Const.MEAL_NEUTRAL -> binding.neutralFeelingButton.alpha = 1f
+            Const.MEAL_HAPPY -> binding.happyFeelingButton.alpha = 1f
+            Const.MEAL_SMILING -> binding.smilingFeelingButton.alpha = 1f
         }
         updateNextButtonState()
     }
@@ -113,11 +113,11 @@ class NewMealAddMealActivity : AppCompatActivity() {
 
     private fun getFeeling(): String {
         when {
-            binding.skullFeelingButton.alpha == 1f -> return Const.FEELING_SKULL
-            binding.confusedFeelingButton.alpha == 1f -> return Const.FEELING_CONFUSED
-            binding.neutralFeelingButton.alpha == 1f -> return Const.FEELING_NEUTRAL
-            binding.happyFeelingButton.alpha == 1f -> return Const.FEELING_HAPPY
-            binding.smilingFeelingButton.alpha == 1f -> return Const.FEELING_SMILING
+            binding.skullFeelingButton.alpha == 1f -> return Const.MEAL_SKULL
+            binding.confusedFeelingButton.alpha == 1f -> return Const.MEAL_CONFUSED
+            binding.neutralFeelingButton.alpha == 1f -> return Const.MEAL_NEUTRAL
+            binding.happyFeelingButton.alpha == 1f -> return Const.MEAL_HAPPY
+            binding.smilingFeelingButton.alpha == 1f -> return Const.MEAL_SMILING
         }
         return Const.STRING_NO_VALUE
     }

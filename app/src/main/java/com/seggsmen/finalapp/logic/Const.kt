@@ -6,11 +6,11 @@ object Const {
     const val MAX_IMAGE_STRING_SIZE = 25000
 
     // Feeling buttons for new meal
-    const val FEELING_SKULL = "SKULL"
-    const val FEELING_CONFUSED = "CONFUSED"
-    const val FEELING_NEUTRAL = "NEUTRAL"
-    const val FEELING_HAPPY = "HAPPY"
-    const val FEELING_SMILING = "SMILING"
+    const val MEAL_SKULL = "SKULL"
+    const val MEAL_CONFUSED = "CONFUSED"
+    const val MEAL_NEUTRAL = "NEUTRAL"
+    const val MEAL_HAPPY = "HAPPY"
+    const val MEAL_SMILING = "SMILING"
 
     // Portion sizes for new meal
     const val PORTION_SMALL = "SMALL"
@@ -33,4 +33,25 @@ object Const {
     const val DB_USERS = "Users"
     const val DB_PETNAMES = "PetName"
     const val DB_PAST_MEALS = "PastMeals"
+    const val DB_PET_STATS = "PetStats"
+    const val DB_NAME = "name"
+    const val DB_SAVED = "saved"
+    const val DB_IMAGE_STRING = "imageString"
+    const val DB_VEGETABLE = "vegetableServings"
+    const val DB_FRUIT = "fruitServings"
+    const val DB_GRAIN = "grainServings"
+    const val DB_FISH = "fishServings"
+    const val DB_POULTRY = "poultryServings"
+    const val DB_REDMEAT = "redMeatServings"
+    const val DB_OIL = "oilServings"
+    const val DB_DAIRY = "dairyServings"
+    const val DB_TIMES_EATEN = "timesEaten"
+    const val DB_LAST_EATEN = "timeLastEaten"
+    const val DB_LAST_VISITED = "timeLastVisited"
+    const val DB_FEELING = "feeling"
+
+    // Feelings for pet
+    const val FEELING_HAPPY = "Happy"
+    const val FEELING_NEUTRAL = "Neutral"
+    const val FEELING_SAD = "Sad"
 }
