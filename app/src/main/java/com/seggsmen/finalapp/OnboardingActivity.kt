@@ -133,14 +133,14 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         petStats.timeLastDecay = Instant.ofEpochMilli(System.currentTimeMillis())
                                     .atZone(ZoneId.systemDefault())
                                     .toLocalDateTime().toString()
-        petStats.vegetableServings = 100
-        petStats.fruitServings = 100
-        petStats.grainServings = 100
-        petStats.redMeatServings = 100
-        petStats.poultryServings = 100
-        petStats.fishServings = 100
-        petStats.oilServings = 100
-        petStats.dairyServings = 100
+        petStats.vegetableServings = 0
+        petStats.fruitServings = 0
+        petStats.grainServings = 0
+        petStats.redMeatServings = 0
+        petStats.poultryServings = 0
+        petStats.fishServings = 0
+        petStats.oilServings = 0
+        petStats.dairyServings = 0
         petStatRef.setValue(petStats)
 
         startActivity(intent)
