@@ -20,7 +20,7 @@ import com.seggsmen.finalapp.ViewPastMealActivity
 import com.seggsmen.finalapp.databinding.CardSavedMealRowBinding
 import com.seggsmen.finalapp.util.BitmapConverter
 
-class SavedMealListAdapter(private val meals: List<SavedMeal>, private val context: Context, private val listener: (position: Int) -> Unit) :
+class SavedMealListAdapter(private val meals: List<NewMeal>, private val context: Context, private val listener: (position: Int) -> Unit) :
     RecyclerView.Adapter<SavedMealListAdapter.ViewHolder>() {
 
     var selectedPos = RecyclerView.NO_ID.toInt()
@@ -79,7 +79,7 @@ class SavedMealListAdapter(private val meals: List<SavedMeal>, private val conte
         }
     }
 
-    public fun getSelectedFood(): SavedMeal? {
+    public fun getSelectedFood(): NewMeal? {
          return when {
             selectedPos < 0 -> {
                 null

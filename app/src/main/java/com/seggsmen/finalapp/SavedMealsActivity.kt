@@ -54,7 +54,7 @@ class SavedMealsActivity : AppCompatActivity() {
             .addListenerForSingleValueEvent(
                 object: ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        var savedMeals: ArrayList<SavedMeal> = arrayListOf()
+                        var savedMeals: ArrayList<NewMeal> = arrayListOf()
                         if (snapshot.value != null) {
                             val mealsFromFirebase = snapshot.value as Map<String, Map<String, Any>>
 
@@ -65,10 +65,12 @@ class SavedMealsActivity : AppCompatActivity() {
                                 if (isSaved) {
                                     mealIdList.add(mealId)
 
-                                    var meal = SavedMeal(
+                                    var meal = NewMeal(
                                         firebaseMeal[Const.DB_NAME] as String,
-                                        firebaseMeal[Const.DB_SAVED] as Boolean,
                                         firebaseMeal[Const.DB_IMAGE_STRING] as String,
+                                        firebaseMeal[Const.DB_PORTION] as String,
+                                        firebaseMeal[Const.DB_FEELING] as String,
+                                        firebaseMeal[Const.DB_SAVED] as Boolean,
                                         (firebaseMeal[Const.DB_VEGETABLE] as Long).toInt(),
                                         (firebaseMeal[Const.DB_FRUIT] as Long).toInt(),
                                         (firebaseMeal[Const.DB_GRAIN] as Long).toInt(),
@@ -134,7 +136,7 @@ class SavedMealsActivity : AppCompatActivity() {
         if (selectedPos != null) {
             val currentId: String = mealIdList[selectedPos]
 
-            var selectedMeal: SavedMeal? = (list.adapter as SavedMealListAdapter).getSelectedFood()
+            var selectedMeal: NewMeal? = (list.adapter as SavedMealListAdapter).getSelectedFood()
             if (selectedMeal != null) {
                 selectedMeal.timesEaten++
             }
@@ -188,7 +190,7 @@ class SavedMealsActivity : AppCompatActivity() {
     }
 
     private fun onDetail() {
-        val selectedMeal: SavedMeal? = (list.adapter as SavedMealListAdapter).getSelectedFood()
+        val selectedMeal: NewMeal? = (list.adapter as SavedMealListAdapter).getSelectedFood()
 
         val intent: Intent = Intent(this, ViewPastMealActivity::class.java)
         intent.putExtra("name", selectedMeal?.name)

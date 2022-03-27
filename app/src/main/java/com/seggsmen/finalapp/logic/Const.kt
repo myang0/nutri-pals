@@ -49,6 +49,7 @@ object Const {
     const val DB_LAST_EATEN = "timeLastEaten"
     const val DB_LAST_DECAY = "timeLastDecay"
     const val DB_FEELING = "feeling"
+    const val DB_PORTION = "portionSize"
 
     // Feelings for pet
     const val FEELING_HAPPY = "Happy"
