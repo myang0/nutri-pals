@@ -256,15 +256,38 @@ class FeedPetActivity : AppCompatActivity() {
 
     private fun animateFoodStats() {
         if(newMeal.vegetableServings > 0){
-            binding.vegetableValueText.text = "${petStats.vegetableServings}"
             binding.vegetableValueText.animate().scaleX(1f).duration = animationDuration
             binding.vegetableValueText.animate().scaleY(1f).duration = animationDuration
-
         }
 
-
-        binding.fruitValueText.animate().scaleX(1f).duration = animationDuration
-        binding.fruitValueText.animate().scaleY(1f).duration = animationDuration
+        if(newMeal.fruitServings > 0){
+            binding.fruitValueText.animate().scaleX(1f).duration = animationDuration
+            binding.fruitValueText.animate().scaleY(1f).duration = animationDuration
+        }
+        if(newMeal.grainServings > 0){
+            binding.grainValueText.animate().scaleX(1f).duration = animationDuration
+            binding.grainValueText.animate().scaleY(1f).duration = animationDuration
+        }
+        if(newMeal.fishServings > 0){
+            binding.fishValueText.animate().scaleX(1f).duration = animationDuration
+            binding.fishValueText.animate().scaleY(1f).duration = animationDuration
+        }
+        if(newMeal.poultryServings > 0){
+            binding.poultryValueText.animate().scaleX(1f).duration = animationDuration
+            binding.poultryValueText.animate().scaleY(1f).duration = animationDuration
+        }
+        if(newMeal.oilServings > 0){
+            binding.poultryValueText.animate().scaleX(1f).duration = animationDuration
+            binding.poultryValueText.animate().scaleY(1f).duration = animationDuration
+        }
+        if(newMeal.redMeatServings > 0){
+            binding.poultryValueText.animate().scaleX(1f).duration = animationDuration
+            binding.poultryValueText.animate().scaleY(1f).duration = animationDuration
+        }
+        if(newMeal.dairyServings > 0){
+            binding.poultryValueText.animate().scaleX(1f).duration = animationDuration
+            binding.poultryValueText.animate().scaleY(1f).duration = animationDuration
+        }
 
         binding.grainValueText.animate().scaleX(1f).duration = animationDuration
         binding.grainValueText.animate().scaleY(1f).withEndAction {
