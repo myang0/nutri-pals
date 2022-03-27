@@ -46,8 +46,6 @@ class FeedPetActivity : AppCompatActivity() {
 
         loadPetStats()
 
-        navigateToNextScreen()
-
         binding = ActivityFeedPetBinding.inflate (layoutInflater)
         setContentView(binding.root)
         snack = binding.snack
@@ -93,42 +91,6 @@ class FeedPetActivity : AppCompatActivity() {
             }
 
             //todo we have to have this because yes
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
-    }
-
-    private fun navigateToNextScreen() {
-        val databaseRef = Firebase.database
-        val userDataRef = databaseRef.getReference(Const.DB_USERS)
-
-        val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-        val userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)
-
-        val uuid: String = UUID.randomUUID().toString()
-        userDataRef.child(userKey!!).child(Const.DB_PAST_MEALS).child("Meal_${uuid}").setValue(newMeal)
-
-        // Update pet stats
-        val petStatsRef = userDataRef.child(userKey).child(Const.DB_PET_STATS)
-        val petStats = PetStats()
-
-        petStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val dbPetStats = snapshot.value as HashMap<*, *>
-                petStats.feeling = dbPetStats [Const.DB_FEELING] as String
-                petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as String
-                petStats.timeLastDecay = dbPetStats [Const.DB_LAST_DECAY] as String
-                petStats.vegetableServings = dbPetStats [Const.DB_VEGETABLE] as Long
-                petStats.fruitServings = dbPetStats [Const.DB_FRUIT] as Long
-                petStats.grainServings = dbPetStats [Const.DB_GRAIN] as Long
-                petStats.fishServings = dbPetStats [Const.DB_FISH] as Long
-                petStats.poultryServings = dbPetStats [Const.DB_POULTRY] as Long
-                petStats.redMeatServings = dbPetStats [Const.DB_REDMEAT] as Long
-                petStats.oilServings = dbPetStats [Const.DB_OIL] as Long
-                petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Long
-
-            }
-
             override fun onCancelled(error: DatabaseError) {
             }
         })
