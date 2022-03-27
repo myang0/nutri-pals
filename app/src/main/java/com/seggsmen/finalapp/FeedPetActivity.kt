@@ -220,33 +220,33 @@ class FeedPetActivity : AppCompatActivity() {
         }
 
         if(newMeal.fishServings > 0) {
-            binding.grainValueText.text = "${petStats.fishServings}"
-            binding.grainValueText.scaleX = 1.5f
-            binding.grainValueText.scaleY = 1.5f
+            binding.fishValueText.text = "${petStats.fishServings}"
+            binding.fishValueText.scaleX = 1.5f
+            binding.fishValueText.scaleY = 1.5f
         }
 
         if(newMeal.poultryServings > 0) {
-            binding.grainValueText.text = "${petStats.poultryServings}"
-            binding.grainValueText.scaleX = 1.5f
-            binding.grainValueText.scaleY = 1.5f
+            binding.poultryValueText.text = "${petStats.poultryServings}"
+            binding.poultryValueText.scaleX = 1.5f
+            binding.poultryValueText.scaleY = 1.5f
         }
 
         if(newMeal.oilServings > 0) {
-            binding.grainValueText.text = "${petStats.oilServings}"
-            binding.grainValueText.scaleX = 1.5f
-            binding.grainValueText.scaleY = 1.5f
+            binding.oilValueText.text = "${petStats.oilServings}"
+            binding.oilValueText.scaleX = 1.5f
+            binding.oilValueText.scaleY = 1.5f
         }
 
         if(newMeal.redMeatServings > 0) {
-            binding.grainValueText.text = "${petStats.redMeatServings}"
-            binding.grainValueText.scaleX = 1.5f
-            binding.grainValueText.scaleY = 1.5f
+            binding.redMeatValueText.text = "${petStats.redMeatServings}"
+            binding.redMeatValueText.scaleX = 1.5f
+            binding.redMeatValueText.scaleY = 1.5f
         }
 
         if(newMeal.dairyServings > 0) {
-            binding.grainValueText.text = "${petStats.dairyServings}"
-            binding.grainValueText.scaleX = 1.5f
-            binding.grainValueText.scaleY = 1.5f
+            binding.dairyValueText.text = "${petStats.dairyServings}"
+            binding.dairyValueText.scaleX = 1.5f
+            binding.dairyValueText.scaleY = 1.5f
         }
 
         binding.grainValueText.animate().scaleX(1.5f).withEndAction{
@@ -255,8 +255,13 @@ class FeedPetActivity : AppCompatActivity() {
     }
 
     private fun animateFoodStats() {
-        binding.vegetableValueText.animate().scaleX(1f).duration = animationDuration
-        binding.vegetableValueText.animate().scaleY(1f).duration = animationDuration
+        if(newMeal.vegetableServings > 0){
+            binding.vegetableValueText.text = "${petStats.vegetableServings}"
+            binding.vegetableValueText.animate().scaleX(1f).duration = animationDuration
+            binding.vegetableValueText.animate().scaleY(1f).duration = animationDuration
+
+        }
+
 
         binding.fruitValueText.animate().scaleX(1f).duration = animationDuration
         binding.fruitValueText.animate().scaleY(1f).duration = animationDuration
