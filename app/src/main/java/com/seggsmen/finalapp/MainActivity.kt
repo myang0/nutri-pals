@@ -51,11 +51,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadPetStats() {
         val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        // getString args: string key, default value if key is incorrect
         userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
 
         petStatsRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_PET_STATS)
+
         petStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 val dbPetStats = snapshot.value as HashMap<*, *>
                 petStats.feeling = dbPetStats [Const.DB_FEELING] as String
                 petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as String
@@ -69,9 +72,11 @@ class MainActivity : AppCompatActivity() {
                 petStats.oilServings = dbPetStats [Const.DB_OIL] as Long
                 petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Long
 
+                //todo erika no dont copy paste this bad
                 checkFoodServingDecay()
             }
 
+            //todo we have to have this because yes
             override fun onCancelled(error: DatabaseError) {
             }
         })
