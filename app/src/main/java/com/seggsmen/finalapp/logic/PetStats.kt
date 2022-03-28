@@ -8,6 +8,7 @@ import java.time.ZoneId
 
 @Parcelize
 data class PetStats(
+    var petName: String = Const.STRING_NO_VALUE,
     var feeling: String = Const.STRING_NO_VALUE,
     var timeLastEaten: String = Const.STRING_NO_VALUE,
     var timeLastDecay: String = Const.STRING_NO_VALUE,

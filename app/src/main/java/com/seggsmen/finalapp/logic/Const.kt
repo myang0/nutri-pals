@@ -31,7 +31,7 @@ object Const {
 
     // Firebase Database Keys
     const val DB_USERS = "Users"
-    const val DB_PETNAMES = "PetName"
+    const val DB_PETNAME = "petName"
     const val DB_PAST_MEALS = "PastMeals"
     const val DB_PET_STATS = "PetStats"
     const val DB_NAME = "name"
