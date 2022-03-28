@@ -43,6 +43,8 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
 
     lateinit var petNameCaller: PetNameListener
 
+    var petName: String = "Bjingus"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Get necessary references
@@ -100,6 +102,8 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
     override fun onNameConfirmed(petName: String) {
         viewPager.setCurrentItem(viewPager.currentItem + 1)
 
+        this.petName = petName
+
         petNameCaller.setPetName(petName)
     }
 
@@ -138,8 +142,7 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         petStats.oilServings = 0
         petStats.dairyServings = 0
 
-        // TODO: Set pet name here.
-        petStats.petName = "Bjingus"
+        petStats.petName = this.petName
         petStatRef.setValue(petStats)
 
         // Initialize evolution stats

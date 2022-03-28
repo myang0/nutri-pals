@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     var evoStats = EvoStats()
     val animationDuration = (200).toLong()
     lateinit var userKey: String
+
     lateinit var sharedPrefs: SharedPreferences
     lateinit var petStatsRef: DatabaseReference
     lateinit var evoStatsRef: DatabaseReference
