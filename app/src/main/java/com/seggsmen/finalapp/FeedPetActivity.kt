@@ -50,6 +50,7 @@ class FeedPetActivity : AppCompatActivity() {
         setContentView(binding.root)
         snack = binding.snack
         bjingus = binding.bjingus
+
         snack.post {
             setSnackDraggable()
         }
@@ -88,6 +89,10 @@ class FeedPetActivity : AppCompatActivity() {
                 petStats.redMeatServings = dbPetStats [Const.DB_REDMEAT] as Long
                 petStats.oilServings = dbPetStats [Const.DB_OIL] as Long
                 petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Long
+                petStats.petName = dbPetStats [Const.DB_PETNAME] as String
+
+                binding.clickToFeedText.text = "Drag to feed ${petStats.petName}!"
+                binding.bjingusHappyText.text = "${petStats.petName} is happy!"
             }
 
             //todo we have to have this because yes
@@ -114,9 +119,9 @@ class FeedPetActivity : AppCompatActivity() {
         binding.bjingusHappyText.alpha = 0f
         binding.bjingusHappyText.animate().alpha(1f).duration = animationDuration
 
-        binding.affectionText.visibility = View.VISIBLE
-        binding.affectionText.alpha = 0f
-        binding.affectionText.animate().alpha(1f).duration = animationDuration
+//        binding.affectionText.visibility = View.VISIBLE
+//        binding.affectionText.alpha = 0f
+//        binding.affectionText.animate().alpha(1f).duration = animationDuration
 
         binding.heartFarLeft.animate().scaleX(1f).duration = animationDuration
         binding.heartFarLeft.animate().scaleY(1f).duration = animationDuration
