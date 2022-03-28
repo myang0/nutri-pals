@@ -45,9 +45,11 @@
         android:layout_marginBottom="32dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
+        android:background="@drawable/rounded_corners"
         android:text="Select"
         android:alpha="0.5"
         android:clickable="false"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -59,9 +61,11 @@
         android:layout_marginEnd="16dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
+        android:background="@drawable/rounded_corners"
         android:text="Details"
         android:alpha="0.5"
         android:clickable="false"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/savedMealsSelectButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
