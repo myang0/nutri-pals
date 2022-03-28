@@ -81,7 +81,6 @@ class MainActivity : AppCompatActivity() {
                 loadEvoData()
             }
 
-            //todo we have to have this because yes
             override fun onCancelled(error: DatabaseError) {
             }
         })
@@ -168,7 +167,6 @@ class MainActivity : AppCompatActivity() {
                 foodServingDecay()
             } else {
                 Log.d(Const.LOG, "NO SERVINGS, STARVING!")
-                //Todo idk make bjingus sad or something
                 evoStats.starvedServings++
                 evoStatsRef.setValue(evoStats)
             }
