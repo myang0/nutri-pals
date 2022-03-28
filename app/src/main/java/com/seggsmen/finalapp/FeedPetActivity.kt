@@ -210,7 +210,7 @@ class FeedPetActivity : AppCompatActivity() {
             binding.dairyValueText.scaleY = 1.5f
         }
 
-        binding.grainValueText.animate().scaleX(1.5f).withEndAction{
+        binding.invisibleValueText.animate().scaleX(1.5f).withEndAction{
             animateFoodStats()
         }.duration = animationDuration * (1.5).toLong()
     }
@@ -249,8 +249,8 @@ class FeedPetActivity : AppCompatActivity() {
             binding.dairyValueText.animate().scaleY(1f).duration = animationDuration
         }
 
-        binding.grainValueText.animate().scaleX(1f).duration = animationDuration
-        binding.grainValueText.animate().scaleY(1f).withEndAction {
+        binding.invisibleValueText.animate().scaleX(1f).duration = animationDuration
+        binding.invisibleValueText.animate().scaleY(1f).withEndAction {
             binding.screenLayout.setOnClickListener { returnToHomeScreen() }
         }.duration = animationDuration
     }
