@@ -124,6 +124,7 @@ class NewMealServingActivity : AppCompatActivity() {
         petStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dbPetStats = snapshot.value as HashMap<*, *>
+                petStats.petName = dbPetStats[Const.DB_PETNAME] as String
                 petStats.feeling = dbPetStats [Const.DB_FEELING] as String
                 petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as String
                 petStats.timeLastDecay = dbPetStats [Const.DB_LAST_DECAY] as String
