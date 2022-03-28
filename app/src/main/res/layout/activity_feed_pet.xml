@@ -210,7 +210,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/fruitCard"
+                android:id="@+id/poultryCard"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
@@ -222,12 +222,24 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/fruitValueText"
+                        android:id="@+id/poultryValueText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
                         android:text="10"
                         android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView24"
+                        app:layout_constraintTop_toTopOf="@+id/imageView24" />
+
+                    <TextView
+                        android:id="@+id/invisibleValueText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:textColor="#00000000"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView24"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -259,7 +271,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/grainCard"
+                android:id="@+id/fruitCard"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
@@ -271,7 +283,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/grainValueText"
+                        android:id="@+id/fruitValueText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -301,7 +313,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/fishCard"
+                android:id="@+id/redMeatCard"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
@@ -313,7 +325,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/fishValueText"
+                        android:id="@+id/redMeatValueText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -351,7 +363,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/poultryCard"
+                android:id="@+id/grainCard"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
@@ -363,7 +375,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/poultryValueText"
+                        android:id="@+id/grainValueText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -393,7 +405,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/redMeatCard"
+                android:id="@+id/oilCard"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
@@ -405,7 +417,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/redMeatValueText"
+                        android:id="@+id/oilValueText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"
@@ -441,7 +453,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/oilCard"
+                android:id="@+id/fishCard"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
@@ -453,7 +465,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/oilValueText"
+                        android:id="@+id/fishValueText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="12dp"

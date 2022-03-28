@@ -2,6 +2,7 @@ package com.seggsmen.finalapp
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +15,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.seggsmen.finalapp.databinding.ActivityMainBinding
 import com.seggsmen.finalapp.logic.Const
+import com.seggsmen.finalapp.logic.EvoStats
 import com.seggsmen.finalapp.logic.PetStats
 import java.time.Instant
 import java.time.LocalDateTime
@@ -23,9 +25,13 @@ import java.time.temporal.ChronoUnit
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     var petStats = PetStats()
+    var evoStats = EvoStats()
     val animationDuration = (200).toLong()
     lateinit var userKey: String
+
+    lateinit var sharedPrefs: SharedPreferences
     lateinit var petStatsRef: DatabaseReference
+    lateinit var evoStatsRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,13 +56,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadPetStats() {
-        val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
         userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
 
         petStatsRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_PET_STATS)
+
         petStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 val dbPetStats = snapshot.value as HashMap<*, *>
+                petStats.petName = dbPetStats [Const.DB_PETNAME] as String
                 petStats.feeling = dbPetStats [Const.DB_FEELING] as String
                 petStats.timeLastEaten = dbPetStats [Const.DB_LAST_EATEN] as String
                 petStats.timeLastDecay = dbPetStats [Const.DB_LAST_DECAY] as String
@@ -69,12 +78,62 @@ class MainActivity : AppCompatActivity() {
                 petStats.oilServings = dbPetStats [Const.DB_OIL] as Long
                 petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Long
 
-                checkFoodServingDecay()
+                binding.petName.text = petStats.petName
+                loadEvoData()
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
         })
+    }
+
+    private fun loadEvoData() {
+        userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
+
+        evoStatsRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_EVO_STATS)
+        evoStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val dbEvoStats = snapshot.value as HashMap<*, *>
+                evoStats.evoType = dbEvoStats [Const.DB_EVO_TYPE] as String
+                evoStats.timeLastEvo = dbEvoStats [Const.DB_LAST_EVO] as String
+                evoStats.totalServings = dbEvoStats [Const.DB_TOTAL_SERVINGS] as Long
+                evoStats.starvedServings = dbEvoStats [Const.DB_STARVED_SERVINGS] as Long
+                evoStats.vegetableServings = dbEvoStats [Const.DB_VEGETABLE] as Long
+                evoStats.fruitServings = dbEvoStats [Const.DB_FRUIT] as Long
+                evoStats.grainServings = dbEvoStats [Const.DB_GRAIN] as Long
+                evoStats.fishServings = dbEvoStats [Const.DB_FISH] as Long
+                evoStats.poultryServings = dbEvoStats [Const.DB_POULTRY] as Long
+                evoStats.redMeatServings = dbEvoStats [Const.DB_REDMEAT] as Long
+                evoStats.oilServings = dbEvoStats [Const.DB_OIL] as Long
+                evoStats.dairyServings = dbEvoStats [Const.DB_DAIRY] as Long
+
+                checkFoodServingDecay()
+                checkEvolution()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun checkEvolution() {
+        val lastEvoTime = LocalDateTime.parse(evoStats.timeLastEvo)
+
+        val currentTime = Instant.ofEpochMilli(System.currentTimeMillis())
+            .atZone(ZoneId.systemDefault())
+            .toLocalDateTime()
+
+        val timeElapsed: Long = ChronoUnit.MINUTES.between(lastEvoTime, currentTime)
+        Log.d(Const.LOG, "Last Evo Time: ${lastEvoTime}")
+        Log.d(Const.LOG, "Current Time: ${currentTime}")
+        Log.d(Const.LOG, "Minutes Elapsed: ${timeElapsed}")
+
+        if (timeElapsed > 60*24*7 && evoStats.evoType == Const.EVO_INITIAL) {
+            Log.d(Const.LOG, "Starting Evolution")
+//            val intent = Intent(this, ___:class.java)
+//            startActivity(intent)
+        }
     }
 
     private fun checkFoodServingDecay() {
@@ -88,10 +147,10 @@ class MainActivity : AppCompatActivity() {
 //        val timeElapsed: Long = ChronoUnit.SECONDS.between(lastDecayTime, currentTime)
         Log.d(Const.LOG, "Last Decay Time: ${lastDecayTime}")
         Log.d(Const.LOG, "Current Time: ${currentTime}")
-        Log.d(Const.LOG, "Minutes: ${timeElapsed}")
+        Log.d(Const.LOG, "Minutes Elapsed: ${timeElapsed}")
 //        Log.d(Const.LOG, "Seconds: ${timeElapsed}")
 
-        val instances = timeElapsed/(60*12) // Half days
+        val instances = timeElapsed/(60*3) // Every 3 hours -> 8 servings per day
 //        val instances = timeElapsed/30 // Half minutes
         Log.d(Const.LOG, "Instances: ${instances}")
 
@@ -109,8 +168,8 @@ class MainActivity : AppCompatActivity() {
                 foodServingDecay()
             } else {
                 Log.d(Const.LOG, "NO SERVINGS, STARVING!")
-                //Todo idk make bjingus sad or something
-                break
+                evoStats.starvedServings++
+                evoStatsRef.setValue(evoStats)
             }
         }
 

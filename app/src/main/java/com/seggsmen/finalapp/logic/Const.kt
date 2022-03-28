@@ -31,7 +31,7 @@ object Const {
 
     // Firebase Database Keys
     const val DB_USERS = "Users"
-    const val DB_PETNAMES = "PetName"
+    const val DB_PETNAME = "petName"
     const val DB_PAST_MEALS = "PastMeals"
     const val DB_PET_STATS = "PetStats"
     const val DB_NAME = "name"
@@ -49,9 +49,43 @@ object Const {
     const val DB_LAST_EATEN = "timeLastEaten"
     const val DB_LAST_DECAY = "timeLastDecay"
     const val DB_FEELING = "feeling"
+    const val DB_PORTION = "portionSize"
+    const val DB_EVO_STATS = "EvoStats"
+    const val DB_EVO_TYPE = "evoType"
+    const val DB_LAST_EVO = "timeLastEvo"
+    const val DB_TOTAL_SERVINGS = "totalServings"
+    const val DB_STARVED_SERVINGS = "starvedServings"
 
     // Feelings for pet
     const val FEELING_HAPPY = "Happy"
     const val FEELING_NEUTRAL = "Neutral"
     const val FEELING_SAD = "Sad"
+
+    // Evolution Types
+    const val EVO_INITIAL = "preEvolution"
+    const val EVO_VEGETABLES_SMALL = "vegetableSmall"
+    const val EVO_VEGETABLES_MEDIUM = "vegetableMedium"
+    const val EVO_VEGETABLES_LARGE = "vegetableLarge"
+    const val EVO_FRUITS_SMALL = "fruitsSmall"
+    const val EVO_FRUITS_MEDIUM = "fruitsMedium"
+    const val EVO_FRUITS_LARGE = "fruitsLarge"
+    const val EVO_GRAINS_SMALL = "grainsSmall"
+    const val EVO_GRAINS_MEDIUM = "grainsMedium"
+    const val EVO_GRAINS_LARGE = "grainsLarge"
+    const val EVO_FISH_SMALL = "fishSmall"
+    const val EVO_FISH_MEDIUM = "fishMedium"
+    const val EVO_FISH_LARGE = "fishLarge"
+    const val EVO_POULTRY_SMALL = "poultrySmall"
+    const val EVO_POULTRY_MEDIUM = "poultryMedium"
+    const val EVO_POULTRY_LARGE = "poultryLarge"
+    const val EVO_REDMEAT_SMALL = "redMeatSmall"
+    const val EVO_REDMEAT_MEDIUM = "redMeatMedium"
+    const val EVO_REDMEAT_LARGE = "redMeatLarge"
+    const val EVO_OIL_SMALL = "oilSmall"
+    const val EVO_OIL_MEDIUM = "oilMedium"
+    const val EVO_OIL_LARGE = "oilLarge"
+    const val EVO_DAIRY_SMALL = "dairySmall"
+    const val EVO_DAIRY_MEDIUM = "dairyMedium"
+    const val EVO_DAIRY_LARGE = "dairyLarge"
+
 }
