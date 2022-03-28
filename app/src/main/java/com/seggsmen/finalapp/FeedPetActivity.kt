@@ -189,6 +189,7 @@ class FeedPetActivity : AppCompatActivity() {
             binding.poultryValueText.text = "${petStats.poultryServings}"
             binding.poultryValueText.scaleX = 1.5f
             binding.poultryValueText.scaleY = 1.5f
+            Log.d(Const.LOG, "${newMeal.poultryServings}")
         }
 
         if(newMeal.oilServings > 0) {
