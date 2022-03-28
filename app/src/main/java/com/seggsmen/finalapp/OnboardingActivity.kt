@@ -117,9 +117,6 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         val databaseRef = Firebase.database
         val userDataRef = databaseRef.getReference(Const.DB_USERS)
         val userKey = userDataRef.push()
-        val petName = userKey.child(Const.DB_PETNAMES)
-
-        petName.setValue(this.petName)
 
         // Save user key to shared prefs
         with(sharedPrefs.edit()) {
@@ -145,8 +142,7 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         petStats.oilServings = 0
         petStats.dairyServings = 0
 
-        // TODO: Set pet name here.
-        petStats.petName = "Bjingus"
+        petStats.petName = this.petName
         petStatRef.setValue(petStats)
 
         // Initialize evolution stats
