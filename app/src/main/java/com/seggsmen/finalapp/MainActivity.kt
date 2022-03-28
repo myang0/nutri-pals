@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding.pettingArea.setOnClickListener {bjingusFrown()}
         binding.pettingArea.post {enablePetting()}
         binding.trackMealOverlayLayer.alpha = 0f
+        binding.evolveButton.setOnClickListener { navToEvolve() }
     }
 
     private fun loadPetStats() {
@@ -86,6 +87,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 
     private fun loadEvoData() {
         userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
@@ -282,6 +284,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToPastMeals() {
         val intent: Intent = Intent(this, MealLibraryActivity::class.java)
+        startActivity(intent)
+    }
+
+    //temporary button for testing evolution screens
+    private fun navToEvolve() {
+        val intent: Intent = Intent(this, EvolutionActivity::class.java)
         startActivity(intent)
     }
 
