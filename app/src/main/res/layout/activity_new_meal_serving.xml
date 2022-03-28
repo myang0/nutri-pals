@@ -408,6 +408,8 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners"
         android:text="Next"
+        android:alpha="0.5"
+        android:clickable="false"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/indicator"
         app:layout_constraintEnd_toEndOf="parent"

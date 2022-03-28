@@ -22,6 +22,7 @@ class SavedMealsActivity : AppCompatActivity() {
     lateinit var list: RecyclerView
 
     private lateinit var mealIdList: ArrayList<String>
+    private lateinit var selectedMeal: NewMeal
 
     private lateinit var dbRef: FirebaseDatabase
     private lateinit var userDataRef: DatabaseReference
@@ -136,10 +137,8 @@ class SavedMealsActivity : AppCompatActivity() {
         if (selectedPos != null) {
             val currentId: String = mealIdList[selectedPos]
 
-            var selectedMeal: NewMeal? = (list.adapter as SavedMealListAdapter).getSelectedFood()
-            if (selectedMeal != null) {
-                selectedMeal.timesEaten++
-            }
+            selectedMeal = (list.adapter as SavedMealListAdapter).getSelectedFood()!!
+            selectedMeal.timesEaten++
 
             userDataRef.child(userKey!!).child(Const.DB_PAST_MEALS).child(currentId).setValue(selectedMeal)
 
@@ -175,18 +174,64 @@ class SavedMealsActivity : AppCompatActivity() {
                     petStats.dairyServings += selectedMeal.dairyServings
 
                     petStatsRef.setValue(petStats)
-
-                    val intent = Intent(this@SavedMealsActivity, FeedPetActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, selectedMeal)
-                    startActivity(intent)
-                    finish()
+                    saveEvoDataAndNext()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
         }
+    }
+
+    private fun saveEvoDataAndNext() {
+        val evoStatsRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_EVO_STATS)
+        val evoStats = EvoStats()
+
+        evoStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val dbEvoStats = snapshot.value as HashMap<*, *>
+                evoStats.evoType = dbEvoStats [Const.DB_EVO_TYPE] as String
+                evoStats.timeLastEvo = dbEvoStats [Const.DB_LAST_EVO] as String
+                evoStats.totalServings = dbEvoStats [Const.DB_TOTAL_SERVINGS] as Long
+                evoStats.starvedServings = dbEvoStats [Const.DB_STARVED_SERVINGS] as Long
+                evoStats.vegetableServings = dbEvoStats [Const.DB_VEGETABLE] as Long
+                evoStats.fruitServings = dbEvoStats [Const.DB_FRUIT] as Long
+                evoStats.grainServings = dbEvoStats [Const.DB_GRAIN] as Long
+                evoStats.fishServings = dbEvoStats [Const.DB_FISH] as Long
+                evoStats.poultryServings = dbEvoStats [Const.DB_POULTRY] as Long
+                evoStats.redMeatServings = dbEvoStats [Const.DB_REDMEAT] as Long
+                evoStats.oilServings = dbEvoStats [Const.DB_OIL] as Long
+                evoStats.dairyServings = dbEvoStats [Const.DB_DAIRY] as Long
+
+                evoStats.totalServings += selectedMeal.vegetableServings + selectedMeal.fruitServings +
+                        selectedMeal.grainServings + selectedMeal.fishServings +
+                        selectedMeal.poultryServings + selectedMeal.redMeatServings +
+                        selectedMeal.oilServings + selectedMeal.dairyServings
+                evoStats.vegetableServings += selectedMeal.vegetableServings
+                evoStats.fruitServings += selectedMeal.fruitServings
+                evoStats.grainServings += selectedMeal.grainServings
+                evoStats.fishServings += selectedMeal.fishServings
+                evoStats.poultryServings += selectedMeal.poultryServings
+                evoStats.redMeatServings += selectedMeal.redMeatServings
+                evoStats.oilServings += selectedMeal.oilServings
+                evoStats.dairyServings += selectedMeal.dairyServings
+
+                evoStatsRef.setValue(evoStats)
+                navigateToNextScreen()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun navigateToNextScreen() {
+        val intent = Intent(this@SavedMealsActivity, FeedPetActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.putExtra(Const.EXTRA_CODE_NEW_MEAL, selectedMeal)
+        startActivity(intent)
+        finish()
     }
 
     private fun onDetail() {

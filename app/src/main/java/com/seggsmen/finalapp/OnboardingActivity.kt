@@ -17,6 +17,7 @@ import com.seggsmen.finalapp.fragments.FourthOnboardingPageFragment
 import com.seggsmen.finalapp.fragments.PetNameListener
 import com.seggsmen.finalapp.fragments.ThirdOnboardingPageFragment
 import com.seggsmen.finalapp.logic.Const
+import com.seggsmen.finalapp.logic.EvoStats
 import com.seggsmen.finalapp.logic.PetStats
 import java.time.Instant
 import java.time.ZoneId
@@ -130,9 +131,7 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         petStats.timeLastEaten = Instant.ofEpochMilli(System.currentTimeMillis())
                                     .atZone(ZoneId.systemDefault())
                                     .toLocalDateTime().toString()
-        petStats.timeLastDecay = Instant.ofEpochMilli(System.currentTimeMillis())
-                                    .atZone(ZoneId.systemDefault())
-                                    .toLocalDateTime().toString()
+        petStats.timeLastDecay = petStats.timeLastEaten
         petStats.vegetableServings = 0
         petStats.fruitServings = 0
         petStats.grainServings = 0
@@ -142,6 +141,23 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         petStats.oilServings = 0
         petStats.dairyServings = 0
         petStatRef.setValue(petStats)
+
+        // Initialize evolution stats
+        val evoStatsRef = userKey.child(Const.DB_EVO_STATS)
+        val evoStats = EvoStats()
+        evoStats.evoType = Const.EVO_INITIAL
+        evoStats.timeLastEvo = petStats.timeLastEaten
+        evoStats.totalServings = 0
+        evoStats.starvedServings = 0
+        evoStats.vegetableServings = 0
+        evoStats.fruitServings = 0
+        evoStats.grainServings = 0
+        evoStats.redMeatServings = 0
+        evoStats.poultryServings = 0
+        evoStats.fishServings = 0
+        evoStats.oilServings = 0
+        evoStats.dairyServings = 0
+        evoStatsRef.setValue(evoStats)
 
         startActivity(intent)
     }
