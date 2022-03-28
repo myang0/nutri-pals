@@ -42,6 +42,8 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
 
     lateinit var petNameCaller: PetNameListener
 
+    var petName: String = "Bjingus"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Get necessary references
@@ -99,6 +101,8 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
     override fun onNameConfirmed(petName: String) {
         viewPager.setCurrentItem(viewPager.currentItem + 1)
 
+        this.petName = petName
+
         petNameCaller.setPetName(petName)
     }
 
@@ -114,8 +118,7 @@ class OnboardingActivity : AppCompatActivity(), OnboardingListener {
         val userKey = userDataRef.push()
         val petName = userKey.child(Const.DB_PETNAMES)
 
-        // TODO: Set pet name here.
-        petName.setValue("Bjingus")
+        petName.setValue(this.petName)
 
         // Save user key to shared prefs
         with(sharedPrefs.edit()) {

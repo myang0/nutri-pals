@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
     var petStats = PetStats()
     val animationDuration = (200).toLong()
     lateinit var userKey: String
+
     lateinit var petStatsRef: DatabaseReference
+    lateinit var petNameRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +76,16 @@ class MainActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {
             }
+        })
+
+        petNameRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_PETNAMES)
+        petNameRef.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val petName = snapshot.value.toString()
+                binding.petNameDisplay.text = petName
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
         })
     }
 
