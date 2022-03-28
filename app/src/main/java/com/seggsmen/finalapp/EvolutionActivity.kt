@@ -38,7 +38,7 @@ class EvolutionActivity : AppCompatActivity() {
 
         binding.transitionScreen.alpha = 0f
         binding.transitionScreen.animate().alpha(1f).duration = 1000
-        binding.transitionScreen.animate().alpha(1f).startDelay = 2500
+        binding.transitionScreen.animate().alpha(1f).startDelay = 2250
 
         binding.tapText.alpha = 0f
         binding.tapText.animate().alpha(0.5f).duration = 300
@@ -112,8 +112,8 @@ class EvolutionActivity : AppCompatActivity() {
         var dairyServings: Long = 7
 
         // trying to get the highest value to choose which evolution to evolve into
-        val servingsList = listOf(vegetableServings, fruitServings, grainServings, fishServings, poultryServings, redMeatServings, oilServings, dairyServings)
-        servingsList.sorted()
+        val servingsList = arrayListOf<Long>(vegetableServings, fruitServings, grainServings, fishServings, poultryServings, redMeatServings, oilServings, dairyServings)
+        servingsList.sortedDescending()
         servingsList.forEach {
             println(servingsList)
         }
