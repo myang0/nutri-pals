@@ -19,6 +19,7 @@
 
     <ImageView
         android:id="@+id/star"
+        android:visibility="invisible"
         android:layout_width="79dp"
         android:layout_height="78dp"
         android:layout_marginTop="424dp"
@@ -30,6 +31,7 @@
 
     <ImageView
         android:id="@+id/star1"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
@@ -41,6 +43,7 @@
 
     <ImageView
         android:id="@+id/star2"
+        android:visibility="invisible"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_marginTop="284dp"
@@ -52,6 +55,7 @@
 
     <ImageView
         android:id="@+id/star3"
+        android:visibility="invisible"
         android:layout_width="73dp"
         android:layout_height="74dp"
         android:layout_marginTop="424dp"
@@ -63,6 +67,7 @@
 
     <ImageView
         android:id="@+id/star4"
+        android:visibility="invisible"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_marginTop="216dp"
@@ -74,6 +79,7 @@
 
     <ImageView
         android:id="@+id/star5"
+        android:visibility="invisible"
         android:layout_width="37dp"
         android:layout_height="35dp"
         android:layout_marginTop="204dp"
@@ -85,6 +91,7 @@
 
     <ImageView
         android:id="@+id/star6"
+        android:visibility="invisible"
         android:layout_width="37dp"
         android:layout_height="35dp"
         android:layout_marginTop="204dp"
@@ -96,6 +103,7 @@
 
     <ImageView
         android:id="@+id/star7"
+        android:visibility="invisible"
         android:layout_width="44dp"
         android:layout_height="42dp"
         android:layout_marginTop="480dp"
@@ -151,6 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="92dp"
         android:text="Finished"
+        android:textAllCaps="false"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

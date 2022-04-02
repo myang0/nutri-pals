@@ -544,10 +544,13 @@
 
         <Button
             android:id="@+id/evolveButton"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="EVOLVE"
+            android:alpha="0"
+            android:text="Evolve"
+            android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
