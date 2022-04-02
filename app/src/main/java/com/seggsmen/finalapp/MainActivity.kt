@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding.pettingArea.setOnClickListener {bjingusFrown()}
         binding.pettingArea.post {enablePetting()}
         binding.trackMealOverlayLayer.alpha = 0f
-        binding.evolveButton.setOnClickListener { navToEvolve() }
+        binding.evolveButton.setOnClickListener { navigateToEvolve() }
     }
 
     private fun loadPetStats() {
@@ -133,8 +133,7 @@ class MainActivity : AppCompatActivity() {
 
         if (timeElapsed > 60*24*7 && evoStats.evoType == Const.EVO_INITIAL) {
             Log.d(Const.LOG, "Starting Evolution")
-//            val intent = Intent(this, ___:class.java)
-//            startActivity(intent)
+            navigateToEvolve()
         }
     }
 
@@ -288,9 +287,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     //temporary button for testing evolution screens
-    private fun navToEvolve() {
-        val intent: Intent = Intent(this, EvolutionActivity::class.java)
-        startActivity(intent)
+    private fun navigateToEvolve() {
+        if (evoStats.evoType == Const.EVO_INITIAL) {
+            val intent: Intent = Intent(this, EvolutionActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun showBlurAndTrackButton() {
