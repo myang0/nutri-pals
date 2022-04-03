@@ -121,8 +121,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changePet(){
-        var evoType: String = Const.STRING_NO_VALUE
-
         if (evoStats.evoType == Const.EVO_VEGETABLES_MEDIUM){
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_veggie)
         }
@@ -147,11 +145,9 @@ class MainActivity : AppCompatActivity() {
         else if (evoStats.evoType == Const.EVO_DAIRY_MEDIUM) {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_dairy)
         }
-        else if (evoStats.evoType == Const.EVO_PR){
+        else if (evoStats.evoType == Const.EVO_INITIAL){
             binding.mainActivityBjingus.setImageResource(R.drawable.bjingus)
         }
-
-        evoStatsRef.setValue(evoStats)
     }
 
     private fun checkEvolution() {
