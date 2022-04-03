@@ -160,7 +160,6 @@ class EvolutionActivity : AppCompatActivity() {
             evoStats.evoType = Const.EVO_GRAINS_MEDIUM
         }
         else if (highestGroup == servingsList[3]) {
-            // change drawable to fish bjingus
             binding.evoBjingus1.setImageResource(R.drawable.bjingusred)
             evoStats.evoType = Const.EVO_FISH_MEDIUM
         }
