@@ -146,41 +146,41 @@ class EvolutionActivity : AppCompatActivity() {
 
         if (highestGroup == servingsList[0]){
             // change drawable to veggie bjingus
-            binding.evoBjingus1.setImageResource(R.drawable.bjingusorange)
+            binding.evoBjingus1.setImageResource(R.drawable.evobjingus_veggie)
             evoStats.evoType = Const.EVO_VEGETABLES_MEDIUM
         }
         else if (highestGroup == servingsList[1]) {
             // change drawable to fruit bjingus
-            binding.evoBjingus1.setImageResource(R.drawable.bjingusred)
+            binding.evoBjingus1.setImageResource(R.drawable.evobjingus_froot)
             evoStats.evoType = Const.EVO_FRUITS_MEDIUM
         }
         else if (highestGroup == servingsList[2]) {
             // change drawable to grain bjingus
-            binding.evoBjingus1.setImageResource(R.drawable.bjingusred)
+            binding.evoBjingus1.setImageResource(R.drawable.evobjingus_grain)
             evoStats.evoType = Const.EVO_GRAINS_MEDIUM
         }
         else if (highestGroup == servingsList[3]) {
-            binding.evoBjingus1.setImageResource(R.drawable.bjingusred)
+            binding.evoBjingus1.setImageResource(R.drawable.evobjingus_fishgus)
             evoStats.evoType = Const.EVO_FISH_MEDIUM
         }
         else if (highestGroup == servingsList[4]) {
             // change drawable to poultry bjingus
-            binding.evoBjingus1.setImageResource(R.drawable.bjingusorange)
+            binding.evoBjingus1.setImageResource(R.drawable.evobjingus_poultry)
             evoStats.evoType = Const.EVO_POULTRY_MEDIUM
         }
         else if (highestGroup == servingsList[5]) {
             // change drawable to red meat bjingus
-            binding.evoBjingus1.setImageResource(R.drawable.bjingusred)
+            binding.evoBjingus1.setImageResource(R.drawable.evobjingus_redmeat)
             evoStats.evoType = Const.EVO_REDMEAT_MEDIUM
         }
         else if (highestGroup == servingsList[6]) {
             // change drawable to oil bjingus
-            binding.evoBjingus1.setImageResource(R.drawable.bjingusred)
+            binding.evoBjingus1.setImageResource(R.drawable.evobjingus_oil)
             evoStats.evoType = Const.EVO_OIL_MEDIUM
         }
         else if (highestGroup == servingsList[7]) {
             // change drawable to dairy bjingus
-            binding.evoBjingus1.setImageResource(R.drawable.bjingusred)
+            binding.evoBjingus1.setImageResource(R.drawable.evobjingus_dairy)
             evoStats.evoType = Const.EVO_DAIRY_MEDIUM
         }
         evoStatsRef.setValue(evoStats)
