@@ -217,7 +217,6 @@ class EvolutionActivity : AppCompatActivity() {
         })
     }
 
-
     private fun loadEvoData() {
         userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
 

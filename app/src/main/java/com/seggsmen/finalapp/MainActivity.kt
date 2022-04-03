@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity() {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_dairy)
         }
         else if (evoStats.evoType == Const.EVO_INITIAL){
-            binding.mainActivityBjingus.setImageResource(R.drawable.bjingus)
+            binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_happy_anim)
         }
     }
 
@@ -303,10 +303,11 @@ class MainActivity : AppCompatActivity() {
     private fun bjingusFrown() {
         if(evoStats.evoType == Const.EVO_FISH_MEDIUM){
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_fishgus_frown)
+        } else {
+            binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_upset_anim)
         }
         binding.mainActivityBjingus.animate().alpha(1f).withEndAction {
             changePet()
-//            binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_happy_anim)
         }.duration = 1000
     }
 

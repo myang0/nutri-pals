@@ -36,6 +36,7 @@ class FeedPetActivity : AppCompatActivity() {
     var evoStats = EvoStats()
     lateinit var userKey: String
     lateinit var petStatsRef: DatabaseReference
+    lateinit var evoStatsRef: DatabaseReference
 
     lateinit var newMeal: NewMeal
 
@@ -67,6 +68,14 @@ class FeedPetActivity : AppCompatActivity() {
         return super.onTouchEvent(event)
     }
 
+    private fun setBjingusSprite(){
+        if(evoStats.evoType == Const.EVO_FISH_MEDIUM){
+            binding.bjingus.setImageResource(R.drawable.evobjingus_fishgus_eat)
+        } else {
+            binding.bjingus.setImageResource(R.drawable.bjingus_mouth_open_anim)
+        }
+    }
+
     private fun loadPetStats() {
         val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
         // getString args: string key, default value if key is incorrect
@@ -92,9 +101,29 @@ class FeedPetActivity : AppCompatActivity() {
 
                 binding.clickToFeedText.text = "Drag to feed ${petStats.petName}!"
                 binding.bjingusHappyText.text = "${petStats.petName} is happy!"
+
+                loadEvoData()
             }
 
-            //todo we have to have this because yes
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun loadEvoData() {
+        val sharedPrefs = this.getSharedPreferences(Const.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
+
+        evoStatsRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_EVO_STATS)
+        evoStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val dbEvoStats = snapshot.value as HashMap<*, *>
+                evoStats.evoType = dbEvoStats [Const.DB_EVO_TYPE] as String
+
+                setBjingusSprite()
+            }
+
             override fun onCancelled(error: DatabaseError) {
             }
         })
@@ -272,16 +301,8 @@ class FeedPetActivity : AppCompatActivity() {
 
     override fun onBackPressed() {}
 
-    private fun setBjingusSprite(){
-        if(evoStats.evoType != Const.EVO_INITIAL){
-            bjingus.setImageResource(R.drawable.evobjingus_fishgus_eat)
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private fun setSnackDraggable() {
-        setBjingusSprite()
-
         var bjingusPositionArr = IntArray(2)
         bjingus.getLocationOnScreen(bjingusPositionArr)
 
