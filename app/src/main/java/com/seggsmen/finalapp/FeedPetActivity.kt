@@ -33,11 +33,11 @@ class FeedPetActivity : AppCompatActivity() {
     var touchY = 0f
 
     var petStats = PetStats()
+    var evoStats = EvoStats()
     lateinit var userKey: String
     lateinit var petStatsRef: DatabaseReference
 
     lateinit var newMeal: NewMeal
-    lateinit var servingsMap: MutableMap<String, Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +73,6 @@ class FeedPetActivity : AppCompatActivity() {
         userKey = sharedPrefs.getString(Const.USER_KEY, Const.STRING_NO_VALUE)!!
 
         petStatsRef = Firebase.database.getReference(Const.DB_USERS).child(userKey).child(Const.DB_PET_STATS)
-
         petStatsRef.addListenerForSingleValueEvent( object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -104,7 +103,13 @@ class FeedPetActivity : AppCompatActivity() {
     private fun onSnackEat() {
         snack.visibility = View.GONE
         binding.clickToFeedText.visibility = View.INVISIBLE
-        bjingus.setImageResource(R.drawable.bjingus_smiling_anim)
+
+        //change bjingus smile based on evolution type
+        if(evoStats.evoType == Const.EVO_INITIAL){
+            bjingus.setImageResource(R.drawable.bjingus_smiling_anim)
+        } else {
+            bjingus.setImageResource(R.drawable.evobjingus_fishgus_happy)
+        }
 
         binding.vegetableValueText.text = "${petStats.vegetableServings - newMeal!!.vegetableServings}"
         binding.fruitValueText.text = "${petStats.fruitServings - newMeal!!.fruitServings}"
@@ -267,8 +272,16 @@ class FeedPetActivity : AppCompatActivity() {
 
     override fun onBackPressed() {}
 
+    private fun setBjingusSprite(){
+        if(evoStats.evoType != Const.EVO_INITIAL){
+            bjingus.setImageResource(R.drawable.evobjingus_fishgus_eat)
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private fun setSnackDraggable() {
+        setBjingusSprite()
+
         var bjingusPositionArr = IntArray(2)
         bjingus.getLocationOnScreen(bjingusPositionArr)
 

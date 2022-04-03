@@ -301,9 +301,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bjingusFrown() {
-        binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_upset_anim)
+        if(evoStats.evoType == Const.EVO_FISH_MEDIUM){
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_fishgus_frown)
+        }
         binding.mainActivityBjingus.animate().alpha(1f).withEndAction {
-            binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_happy_anim)
+            changePet()
+//            binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_happy_anim)
         }.duration = 1000
     }
 
