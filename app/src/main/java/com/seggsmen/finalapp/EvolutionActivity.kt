@@ -249,6 +249,7 @@ class EvolutionActivity : AppCompatActivity() {
 
     private fun returnToHomeScreen() {
         val intent: Intent = Intent(this, MainActivity::class.java)
+
         startActivity(intent)
     }
 }

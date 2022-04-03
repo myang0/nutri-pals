@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                 evoStats.oilServings = dbEvoStats [Const.DB_OIL] as Long
                 evoStats.dairyServings = dbEvoStats [Const.DB_DAIRY] as Long
 
+                changePet()
                 checkFoodServingDecay()
                 checkEvolution()
             }
@@ -117,6 +118,40 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
+    }
+
+    private fun changePet(){
+        var evoType: String = Const.STRING_NO_VALUE
+
+        if (evoStats.evoType == Const.EVO_VEGETABLES_MEDIUM){
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_veggie)
+        }
+        else if (evoStats.evoType == Const.EVO_FRUITS_MEDIUM) {
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_froot)
+        }
+        else if (evoStats.evoType == Const.EVO_GRAINS_MEDIUM) {
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_grain)
+        }
+        else if (evoStats.evoType == Const.EVO_FISH_MEDIUM) {
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_fishgus)
+        }
+        else if (evoStats.evoType == Const.EVO_POULTRY_MEDIUM) {
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_poultry)
+        }
+        else if (evoStats.evoType == Const.EVO_REDMEAT_MEDIUM) {
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_redmeat)
+        }
+        else if (evoStats.evoType == Const.EVO_OIL_MEDIUM) {
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_oil)
+        }
+        else if (evoStats.evoType == Const.EVO_DAIRY_MEDIUM) {
+            binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_dairy)
+        }
+        else if (evoStats.evoType == Const.EVO_PR){
+            binding.mainActivityBjingus.setImageResource(R.drawable.bjingus)
+        }
+
+        evoStatsRef.setValue(evoStats)
     }
 
     private fun checkEvolution() {
