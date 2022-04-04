@@ -123,27 +123,37 @@ class MainActivity : AppCompatActivity() {
     private fun changePet(){
         if (evoStats.evoType == Const.EVO_VEGETABLES_MEDIUM){
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_veggie)
+            binding.bijingusShadow.animate().translationY(90f).start()
         }
         else if (evoStats.evoType == Const.EVO_FRUITS_MEDIUM) {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_froot)
+            binding.bijingusShadow.animate().translationY(90f).start()
         }
         else if (evoStats.evoType == Const.EVO_GRAINS_MEDIUM) {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_grain)
+            binding.bijingusShadow.animate().translationY(65f).start()
         }
         else if (evoStats.evoType == Const.EVO_FISH_MEDIUM) {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_fishgus)
+            binding.bijingusShadow.animate().translationY(90f).start()
         }
         else if (evoStats.evoType == Const.EVO_POULTRY_MEDIUM) {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_poultry)
+            binding.bijingusShadow.animate().translationY(80f).start()
         }
         else if (evoStats.evoType == Const.EVO_REDMEAT_MEDIUM) {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_redmeat)
+            binding.bijingusShadow.animate().translationY(90f).start()
         }
         else if (evoStats.evoType == Const.EVO_OIL_MEDIUM) {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_oil)
+            binding.bijingusShadow.animate().translationY(65f).start()
+            binding.bijingusShadow.animate().translationX(35f).start()
+
         }
         else if (evoStats.evoType == Const.EVO_DAIRY_MEDIUM) {
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_dairy)
+            binding.bijingusShadow.animate().translationY(90f).start()
         }
         else if (evoStats.evoType == Const.EVO_INITIAL){
             binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_happy_anim)
