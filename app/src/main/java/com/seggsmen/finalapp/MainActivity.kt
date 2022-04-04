@@ -323,10 +323,10 @@ class MainActivity : AppCompatActivity() {
 
     //temporary button for testing evolution screens
     private fun navigateToEvolve() {
-        if (evoStats.evoType == Const.EVO_INITIAL) {
+//        if (evoStats.evoType == Const.EVO_INITIAL) {
             val intent: Intent = Intent(this, EvolutionActivity::class.java)
             startActivity(intent)
-        }
+//        }
     }
 
     private fun showBlurAndTrackButton() {

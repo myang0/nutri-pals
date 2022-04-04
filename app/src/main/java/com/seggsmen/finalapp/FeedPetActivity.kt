@@ -134,10 +134,10 @@ class FeedPetActivity : AppCompatActivity() {
         binding.clickToFeedText.visibility = View.INVISIBLE
 
         //change bjingus smile based on evolution type
-        if(evoStats.evoType == Const.EVO_INITIAL){
-            bjingus.setImageResource(R.drawable.bjingus_smiling_anim)
-        } else {
+        if(evoStats.evoType == Const.EVO_FISH_MEDIUM){
             bjingus.setImageResource(R.drawable.evobjingus_fishgus_happy)
+        } else {
+            bjingus.setImageResource(R.drawable.bjingus_smiling_anim)
         }
 
         binding.vegetableValueText.text = "${petStats.vegetableServings - newMeal!!.vegetableServings}"
