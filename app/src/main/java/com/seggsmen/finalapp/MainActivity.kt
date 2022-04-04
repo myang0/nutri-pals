@@ -313,9 +313,10 @@ class MainActivity : AppCompatActivity() {
     private fun bjingusFrown() {
         if(evoStats.evoType == Const.EVO_FISH_MEDIUM){
             binding.mainActivityBjingus.setImageResource(R.drawable.evobjingus_fishgus_frown)
-        } else {
+        } else if (evoStats.evoType == Const.EVO_INITIAL){
             binding.mainActivityBjingus.setImageResource(R.drawable.bjingus_upset_anim)
         }
+
         binding.mainActivityBjingus.animate().alpha(1f).withEndAction {
             changePet()
         }.duration = 1000
