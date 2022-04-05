@@ -67,7 +67,7 @@ class ThirdOnboardingPageFragment : Fragment() {
 
         var nextButtonAnim: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
         nextButtonAnim.duration = 750
-        nextButtonAnim.startOffset = 2500
+        nextButtonAnim.startOffset = 1750
 
         title.startAnimation(titleAnim)
         subtitle.startAnimation(subtitleAnim)
