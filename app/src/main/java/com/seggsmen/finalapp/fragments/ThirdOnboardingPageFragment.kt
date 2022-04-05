@@ -59,11 +59,11 @@ class ThirdOnboardingPageFragment : Fragment() {
     private fun fadeInElements() {
         var titleAnim: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
         titleAnim.duration = 750
-        titleAnim.startOffset = 1000
+        titleAnim.startOffset = 500
 
         var subtitleAnim: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
         subtitleAnim.duration = 750
-        subtitleAnim.startOffset = 1750
+        subtitleAnim.startOffset = 1250
 
         var nextButtonAnim: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
         nextButtonAnim.duration = 750

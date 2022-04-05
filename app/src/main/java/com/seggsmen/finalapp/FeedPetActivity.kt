@@ -137,7 +137,7 @@ class FeedPetActivity : AppCompatActivity() {
         if(evoStats.evoType == Const.EVO_FISH_MEDIUM){
             bjingus.setImageResource(R.drawable.evobjingus_fishgus_happy)
         } else {
-            bjingus.setImageResource(R.drawable.bjingus_smiling_anim)
+            bjingus.setImageResource(R.drawable.bjingus_smile_anim)
         }
 
         binding.vegetableValueText.text = "${petStats.vegetableServings - newMeal!!.vegetableServings}"
