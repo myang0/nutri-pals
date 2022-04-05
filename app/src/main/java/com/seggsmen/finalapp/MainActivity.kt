@@ -38,8 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         loadPetStats()
 
+    }
+
+    private fun loadBinding(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.petName.text = petStats.petName
 
         this.supportActionBar?.hide()
 
@@ -79,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 petStats.oilServings = dbPetStats [Const.DB_OIL] as Long
                 petStats.dairyServings = dbPetStats [Const.DB_DAIRY] as Long
 
-                binding.petName.text = petStats.petName
+
                 loadEvoData()
             }
 
@@ -110,9 +114,11 @@ class MainActivity : AppCompatActivity() {
                 evoStats.oilServings = dbEvoStats [Const.DB_OIL] as Long
                 evoStats.dairyServings = dbEvoStats [Const.DB_DAIRY] as Long
 
+                loadBinding()
                 changePet()
                 checkFoodServingDecay()
                 checkEvolution()
+
             }
 
             override fun onCancelled(error: DatabaseError) {
