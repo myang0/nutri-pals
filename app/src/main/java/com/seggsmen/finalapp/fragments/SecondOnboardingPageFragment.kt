@@ -14,7 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 class SecondOnboardingPageFragment : Fragment() {
     private lateinit var trackFoodSection: ConstraintLayout
     private lateinit var foodLogSection: ConstraintLayout
-    private lateinit var petLogSection: ConstraintLayout
+//    private lateinit var petLogSection: ConstraintLayout
 
     private lateinit var nextButton: Button
 
@@ -28,7 +28,6 @@ class SecondOnboardingPageFragment : Fragment() {
 
         trackFoodSection = fragmentView.findViewById<ConstraintLayout>(R.id.trackFoodSection)
         foodLogSection = fragmentView.findViewById<ConstraintLayout>(R.id.foodLogSection)
-        petLogSection = fragmentView.findViewById<ConstraintLayout>(R.id.petLogSection)
 
         nextButton = fragmentView.findViewById<Button>(R.id.secondNextButton)
         nextButton.setOnClickListener {
@@ -56,17 +55,12 @@ class SecondOnboardingPageFragment : Fragment() {
         foodLogSectionAnim.duration = 750
         foodLogSectionAnim.startOffset = 750
 
-        var petLogSectionAnim: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
-        petLogSectionAnim.duration = 750
-        petLogSectionAnim.startOffset = 1500
-
         var nextButtonAnim: AlphaAnimation = AlphaAnimation(0.0f, 1.0f)
         nextButtonAnim.duration = 750
-        nextButtonAnim.startOffset = 2250
+        nextButtonAnim.startOffset = 1500
 
         trackFoodSection.startAnimation(trackFoodSectionAnim)
         foodLogSection.startAnimation(foodLogSectionAnim)
-        petLogSection.startAnimation(petLogSectionAnim)
         nextButton.startAnimation(nextButtonAnim)
     }
 

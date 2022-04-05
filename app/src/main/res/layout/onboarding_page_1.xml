@@ -8,30 +8,20 @@
 
     <TextView
         android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Welcome!"
-        android:textColor="@color/black"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Subtitle"
-        android:layout_width="260dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
-        android:lineSpacingExtra="8sp"
-        android:text="Get ready to develop healthy eating habits alongside a friend"
+        android:layout_width="298dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="76dp"
+        android:text="Welcome to Nutri-Pals!"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="#292929"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/mainActivityBjingus"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/firstNextButton"
@@ -46,13 +36,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/petsDisplay"
-        android:layout_width="373dp"
-        android:layout_height="159dp"
-        app:layout_constraintBottom_toTopOf="@+id/firstNextButton"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/mainActivityBjingus"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:src="@drawable/allpets"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Subtitle"
-        app:srcCompat="@drawable/allpets" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.535" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
